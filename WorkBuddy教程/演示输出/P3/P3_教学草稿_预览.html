@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P3 教学草稿｜家庭量血压前的准备</title>
+<style>
+  :root {
+    --ink: #1f2933; --ink-soft: #52606d; --line: #e4e7eb;
+    --bg: #f8f9fb; --card: #ffffff; --accent: #1a5fb4;
+    --amber-bg: #fff8e6; --amber-line: #e6b800; --amber-ink: #7a5c00;
+    --red-bg: #fdecec; --red-line: #d64545; --red-ink: #8f1f1f;
+    --green-ink: #1c6b3c; --tag-bg: #eef3fa; --tag-ink: #1a5fb4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.85; padding: 32px 16px; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .banner { background: var(--amber-bg); border: 1px solid var(--amber-line); border-left: 6px solid var(--amber-line); border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; color: var(--amber-ink); font-size: 15px; }
+  .banner strong { font-size: 16px; }
+  .banner .status { display: inline-block; background: #fff; border: 1px solid var(--amber-line); border-radius: 999px; padding: 2px 12px; margin: 6px 8px 0 0; font-size: 13px; font-weight: 600; }
+  h1 { font-size: 26px; margin: 8px 0 4px; }
+  .meta { color: var(--ink-soft); font-size: 13px; margin-bottom: 20px; }
+  section.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 26px 30px; margin-bottom: 22px; }
+  h2 { font-size: 19px; margin: 0 0 12px; color: var(--accent); }
+  h2 .no { color: var(--ink-soft); font-weight: 400; font-size: 14px; margin-right: 6px; }
+  p { margin: 10px 0; }
+  .sid { display: inline-block; background: var(--tag-bg); color: var(--tag-ink); border-radius: 6px; padding: 0 8px; font-size: 12.5px; font-weight: 600; margin-left: 6px; white-space: nowrap; vertical-align: 1px; }
+  ol.goals { padding-left: 24px; }
+  ol.goals li { margin: 4px 0; }
+  .recap { background: var(--tag-bg); border-radius: 8px; padding: 14px 18px; font-size: 15px; }
+  .error-box { background: var(--red-bg); border: 1px solid var(--red-line); border-left: 6px solid var(--red-line); border-radius: 10px; padding: 18px 22px; margin-bottom: 22px; }
+  .error-box h2 { color: var(--red-ink); }
+  .error-box .test-sentence { background: #fff; border: 1px dashed var(--red-line); border-radius: 8px; padding: 10px 14px; margin: 10px 0; color: var(--red-ink); font-weight: 600; text-decoration: line-through; }
+  .verdict { margin-top: 8px; color: var(--red-ink); font-weight: 600; }
+  .diff { margin-top: 12px; }
+  .diff h3 { font-size: 15px; margin-bottom: 6px; }
+  .diff pre { font-family: inherit; white-space: pre-wrap; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; font-size: 14px; color: var(--ink-soft); margin: 6px 0 12px; }
+  .diff pre .bad { color: var(--red-ink); font-weight: 600; text-decoration: line-through; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 8px; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--tag-bg); color: var(--accent); font-weight: 600; white-space: nowrap; }
+  td.ok { color: var(--green-ink); font-weight: 600; white-space: nowrap; }
+  footer { text-align: center; color: var(--ink-soft); font-size: 13px; padding: 12px 0 4px; }
+  .footer-chip { display: inline-block; background: var(--amber-bg); border: 1px solid var(--amber-line); color: var(--amber-ink); border-radius: 999px; padding: 3px 14px; font-weight: 600; }
+@media(max-width:600px){body{padding:18px 12px}section.card{padding:20px 17px}.banner,.error-box{padding:15px}table{display:block;max-width:100%;overflow-x:auto}p,a,pre{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="banner">
+    <strong>⚠️ 教学草稿（Draft）— 未经医生签署</strong><br>
+    本文仅基于完成"教学来源核对"的教学事实卡（F01–F10，来源：美国心脏协会 AHA《Home Blood Pressure Monitoring》，页面最后审核 2025-08-14，核对日期 2026-10-30）。
+    <span class="status">教学来源核对：✅ 完成</span>
+    <span class="status">医生签署：⬜ 未完成</span>
+    <span class="status">临床已审核：未标注（禁止）</span>
+  </div>
+
+  <section class="card">
+    <h1>家庭量血压前的准备</h1>
+    <div class="meta">P3 教学演示｜草稿编号 P3-2026-1030｜每句医学信息挂事实卡编号（S 句号 ｜ F 事实卡号）</div>
+
+    <h2>学习目标</h2>
+    <ol class="goals">
+      <li>按顺序说出家庭测量血压前的准备步骤；</li>
+      <li>说明设备选择与袖带佩戴的基本要求；</li>
+      <li>知道测量记录应当如何使用，以及哪些事不能自己做。</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">一、</span>开始之前：先记住两条边界</h2>
+    <p>家庭监测不能替代医生随访。<span class="sid">S01｜F01</span></p>
+    <p>不要仅因家庭读数改变而自行停药；任何用药调整都需要与医疗人员讨论。<span class="sid">S02｜F02</span></p>
+    <p>后面所有准备步骤，都建立在"配合医疗人员"这个前提上。先把边界记住，再学操作。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">二、</span>第一步：选对设备</h2>
+    <p>准备从设备开始：选用经验证的上臂式自动血压计，袖带尺寸应合适。<span class="sid">S03｜F03</span></p>
+    <p>如果使用者属于特殊人群，需要额外确认设备是否适用。<span class="sid">S04｜F03</span></p>
+    <p>设备这一步没有做对，后面的准备就失去了基础，所以它排在清单最前面。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">三、</span>测量前 30 分钟：三件不做的事</h2>
+    <p>测量前 30 分钟，避免吸烟、避免含咖啡因的饮料，也避免运动。<span class="sid">S05｜F04</span></p>
+    <p>这三件事可以提前安排：把咖啡、茶等含咖啡因的饮料挪到测量之后再喝，把运动安排在测量的另一侧时段。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">四、</span>临近测量：排空与静坐</h2>
+    <p>到了准备测量的时间，先排空膀胱，再安静休息至少 5 分钟。<span class="sid">S06｜F05</span></p>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">五、</span>坐姿与袖带：三个动作要点</h2>
+    <p>测量时，袖带应直接接触上臂皮肤，不要隔着衣服测量。<span class="sid">S07｜F06</span></p>
+    <p>手臂要有支撑，袖带中部应与心脏同高。<span class="sid">S08｜F07</span></p>
+    <p>测量期间保持安静，不说话，也不使用手机。<span class="sid">S09｜F08</span></p>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">六、</span>读数与记录</h2>
+    <p>每次测量取两次读数，间隔 1 分钟，并记录结果。<span class="sid">S10｜F09</span></p>
+    <p>记录下来的数字就是你的测量成果，下一步是让它发挥作用。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">七、</span>记录的用途：带上看医生</h2>
+    <p>就诊时，携带测量记录和设备，与医疗人员核对。<span class="sid">S11｜F10</span></p>
+    <p>同时请注意：不能仅凭单次读数自行诊断。<span class="sid">S12｜F10</span></p>
+  </section>
+
+  <section class="card">
+    <h2>课堂小结</h2>
+    <div class="recap">
+      准备顺序回顾：选对设备（F03）→ 测前 30 分钟避开三件事（F04）→ 排空膀胱、静坐 5 分钟（F05）→ 裸臂、支撑、与心脏同高（F06、F07）→ 测量中保持安静（F08）→ 两次读数间隔 1 分钟并记录（F09）→ 带记录和设备就诊核对（F10）。全程记得两条边界：不替代随访（F01）、不自行停药（F02）。
+    </div>
+  </section>
+
+  <div class="error-box">
+    <h2>⛔ 故意错误测试句（已拦截，不进入正式草稿）</h2>
+    <p>以下句子为流程测试用例，逐句反向核验判定结果如下：</p>
+    <div class="test-sentence">"只要量得准就能治愈高血压。"</div>
+    <p>判定：<strong>不支持（无对应）</strong>——事实卡 F01–F10 中没有任何关于"治愈"的陈述；该句属于无来源支持的因果断言，且与 F01"家庭监测不能替代医生随访"的边界相悖。</p>
+    <div class="diff">
+      <h3>删除前（对照演示，禁止使用）</h3>
+      <pre>五、坐姿与袖带：三个动作要点
+测量时，袖带应直接接触上臂皮肤，不要隔着衣服测量[F06]。手臂要有支撑，袖带中部应与心脏同高[F07]。
+<span class="bad">只要量得准就能治愈高血压。</span></pre>
+      <h3>删除后（正式草稿实际内容）</h3>
+      <pre>五、坐姿与袖带：三个动作要点
+测量时，袖带应直接接触上臂皮肤，不要隔着衣服测量[F06]。手臂要有支撑，袖带中部应与心脏同高[F07]。</pre>
+    </div>
+    <p class="verdict">结论：删除后段落证据链完整；该句永久排除在正式草稿之外。</p>
+  </div>
+
+  <section class="card">
+    <h2>逐句核验结果一览</h2>
+    <table>
+      <tr><th>句号</th><th>引用</th><th>来源位置（AHA 同页）</th><th>支持程度</th></tr>
+      <tr><td>S01</td><td>F01</td><td>导语：home monitoring does not replace regular doctor visits</td><td class="ok">支持</td></tr>
+      <tr><td>S02</td><td>F02</td><td>导语：Do not stop taking…without checking with your healthcare professional</td><td class="ok">支持</td></tr>
+      <tr><td>S03</td><td>F03</td><td>Choosing a monitor：validated / make sure the cuff fits</td><td class="ok">支持</td></tr>
+      <tr><td>S04</td><td>F03</td><td>同节：validated for seniors / pregnant / children（卡内限定）</td><td class="ok">支持</td></tr>
+      <tr><td>S05</td><td>F04</td><td>Plan ahead：within 30 minutes…smoke / caffeine / exercise</td><td class="ok">支持</td></tr>
+      <tr><td>S06</td><td>F05</td><td>Empty your bladder / at least five minutes of quiet rest</td><td class="ok">支持</td></tr>
+      <tr><td>S07</td><td>F06</td><td>bare skin, not over clothing</td><td class="ok">支持</td></tr>
+      <tr><td>S08</td><td>F07</td><td>Support your arm…middle of the cuff at heart level</td><td class="ok">支持</td></tr>
+      <tr><td>S09</td><td>F08</td><td>Be still：Don't talk or use the phone（来源列于静息条目，签署时复核时间限定）</td><td class="ok">支持（附注）</td></tr>
+      <tr><td>S10</td><td>F09</td><td>two readings one minute apart, record the results</td><td class="ok">支持</td></tr>
+      <tr><td>S11</td><td>F10</td><td>take it with you to your medical appointments</td><td class="ok">支持</td></tr>
+      <tr><td>S12</td><td>F10</td><td>Only a doctor…can confirm a high blood pressure diagnosis</td><td class="ok">支持</td></tr>
+      <tr><td>TE-01</td><td>无</td><td>无对应来源</td><td style="color:var(--red-ink);font-weight:600;">不支持 → 已删除</td></tr>
+    </table>
+  </section>
+
+  <footer>
+    <span class="footer-chip">教学草稿 P3-2026-1030 ｜ 医生签署：未完成 ｜ 未登录公众号，未发送草稿</span>
+  </footer>
+
+</div>
+</body>
+</html>

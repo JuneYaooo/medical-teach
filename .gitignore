@@ -1,0 +1,16 @@
+.DS_Store
+.production/
+医学Agent教程/
+医学Agent教程.zip
+WorkBuddy医学教程.zip
+__pycache__/
+*.pyc
+**/.cache/
+**/.tmp/
+**/.workbuddy/
+**/.shots/
+**/.R7项目进度表.ref/
+scripts/assemble_recordings.py
+scripts/build_lessons.py
+scripts/course_specs.py
+scripts/prepare_materials.py

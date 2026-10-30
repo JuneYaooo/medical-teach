@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R6 技术路线预览（教学模拟）</title>
+<style>
+  :root{
+    --ink:#1f2933; --muted:#52606d; --line:#cbd2d9;
+    --blue-bg:#eaf2f8; --blue-bd:#2e86c1; --blue-ink:#1b4f72;
+    --amber-bg:#fef5e7; --amber-bd:#ca6f1e; --amber-ink:#7e5109;
+    --red-bg:#fde8e8; --red-bd:#c0392b; --red-ink:#7b241c;
+    --green-bg:#eafaf1; --green-bd:#1e8449; --green-ink:#145a32;
+    --gray-bg:#f5f7fa; --gray-bd:#9aa5b1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:#f7f9fb;color:var(--ink);line-height:1.6;padding:32px 16px;}
+  .wrap{max-width:880px;margin:0 auto;}
+  h1{font-size:22px;}
+  .meta{font-size:13px;color:var(--muted);margin-top:4px;}
+  .notice{background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--amber-ink);margin:14px 0 10px;}
+  .keyline{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green-bd);border-radius:6px;padding:10px 14px;font-size:13px;color:var(--ink);margin-bottom:20px;}
+  .keyline b{color:var(--green-ink);}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-bottom:20px;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .dot{width:12px;height:12px;border-radius:3px;display:inline-block;}
+  .flow{display:flex;flex-direction:column;align-items:center;}
+  .node{width:100%;max-width:660px;border-radius:10px;padding:14px 18px;font-size:14px;border:2px solid;}
+  .node h3{font-size:15px;margin-bottom:4px;}
+  .node ul{margin:4px 0 0 18px;font-size:13px;color:var(--muted);}
+  .node .tag{display:inline-block;font-size:11.5px;border-radius:4px;padding:1px 7px;margin-left:6px;vertical-align:1px;background:#f9e79f;color:#7e5109;}
+  .n-blue{background:var(--blue-bg);border-color:var(--blue-bd);color:var(--blue-ink);}
+  .n-amber{background:var(--amber-bg);border-color:var(--amber-bd);color:var(--amber-ink);}
+  .n-red{background:var(--red-bg);border-color:var(--red-bd);color:var(--red-ink);}
+  .n-green{background:var(--green-bg);border-color:var(--green-bd);color:var(--green-ink);}
+  .n-gray{background:var(--gray-bg);border-color:var(--gray-bd);color:var(--ink);}
+  .arrow{width:2px;height:26px;background:var(--line);position:relative;margin:2px 0 10px;}
+  .arrow::after{content:"";position:absolute;bottom:-1px;left:-4px;border:5px solid transparent;border-top-color:var(--line);}
+  .branch{display:flex;gap:14px;width:100%;max-width:860px;align-items:stretch;justify-content:center;}
+  .branch .col{flex:1;display:flex;flex-direction:column;align-items:center;min-width:0;}
+  .branch .node{max-width:100%;font-size:13px;padding:12px 12px;}
+  .b-label{font-size:12px;color:var(--muted);text-align:center;margin:2px 0 6px;}
+  .split{width:60%;height:2px;background:var(--line);margin:0 0 2px;}
+  .split-t{width:60%;height:2px;background:var(--line);margin:0 0 14px;}
+  .strike{text-decoration:line-through;opacity:.75;}
+  .timeline{margin:6px 0 24px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;}
+  .timeline table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .timeline th,.timeline td{border-bottom:1px solid #e6ebf0;padding:7px 10px;text-align:left;}
+  .timeline th{background:#f0f4f8;color:var(--muted);font-weight:600;}
+  .timeline tr:last-child td{border-bottom:none;}
+  footer{margin-top:26px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;}
+  @media (max-width:640px){.branch{flex-direction:column;}.branch .col{width:100%;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>R6 教学基金申请书 · 技术路线图</h1>
+    <p class="meta">教学模拟 · 依据《虚构基金指南》与 R6-申请书草稿 · Mermaid 源文件：R6-技术路线.mmd · 纯 HTML/CSS 离线预览，无外部脚本</p>
+  </header>
+
+  <div class="notice">⚠ 教学模拟声明：不对应任何真实研究、机构或人群。凡【待补充】【待确认】【待SAP指定】处为前置条件未落实；设计风险未解决前不声称可行性充分。</div>
+
+  <div class="keyline">
+    <b>口径统一</b>：项目周期 <b>12 个月</b> ≠ 每人随访 12 个月。每人随访 <b>6 个月、6 次月度电话</b>；M1–M2 准备，M3–M4 招募，M9–M10 末次结局，M11–M12 分析结题。
+  </div>
+
+  <div class="timeline">
+    <table>
+      <tr><th>阶段</th><th>月份</th><th>关键内容</th></tr>
+      <tr><td>准备</td><td>M1–M2</td><td>伦理、社区协议、随机化方案、SAP 定稿（含缺失敏感性方法指定）</td></tr>
+      <tr><td>招募与基线</td><td>M3–M4</td><td>筛查、知情同意、基线测量；产出招募率</td></tr>
+      <tr><td>干预与随访</td><td>M4–M9（末例顺延至 M10）</td><td>单次培训＋6 次月度电话；每人随访 6 个月</td></tr>
+      <tr><td>末次结局</td><td>M9–M10</td><td>入组满 6 个月测量；末例末次随访不晚于 M10</td></tr>
+      <tr><td>分析结题</td><td>M11–M12</td><td>数据锁定、清洗、按 SAP 分析、结题报告</td></tr>
+    </table>
+  </div>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--blue-bg);border:2px solid var(--blue-bd);"></i>计划流程</span>
+    <span><i class="dot" style="background:var(--amber-bg);border:2px solid var(--amber-bd);"></i>决策/风险/待指定</span>
+    <span><i class="dot" style="background:var(--red-bg);border:2px solid var(--red-bd);"></i>不采用方案（仅教学对照）</span>
+    <span><i class="dot" style="background:var(--green-bg);border:2px solid var(--green-bd);"></i>产出</span>
+  </div>
+
+  <div class="flow">
+    <div class="node n-blue">
+      <h3>① 准备 M1–M2</h3>
+      <ul>
+        <li>伦理申请【待补充：批件】</li>
+        <li>两社区合作协议【待补充】</li>
+        <li>随机化方案确定【待补充：序列产生与分配隐藏】</li>
+        <li>SAP 定稿（含缺失敏感性方法指定【待SAP指定】）</li>
+      </ul>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node n-amber">
+      <h3>② 设计风险决策点 <span class="tag">待解决</span></h3>
+      <ul>
+        <li>风险：两社区各固定一组 → 社区与处理完全混杂（site 与 group 一一对应）</li>
+        <li>解决前不声称可行性充分</li>
+      </ul>
+    </div>
+
+    <div class="split"></div>
+    <div class="branch">
+      <div class="col">
+        <div class="b-label">方案 A（倾向）</div>
+        <div class="node n-blue">
+          <h3>个体层面随机</h3>
+          <ul><li>前提：两社区受试者名单【待补充】</li><li>1:1 随机，两社区均含两组</li><li>方可调整"中心"</li></ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="b-label">方案 B（备选）</div>
+        <div class="node n-blue">
+          <h3>整群随机</h3>
+          <ul><li>按社区数与 ICC 重算样本量【待补充】</li><li>SAP 改用混合效应模型【待补充】</li></ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="b-label">不采用 · 仅教学对照</div>
+        <div class="node n-red">
+          <h3 class="strike">社区A=干预、社区B=对照</h3>
+          <ul><li>⚠ 社区与处理完全混杂</li><li>「调整中心」不可估计</li><li>基线差异与干预效应不可分</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="split-t"></div>
+
+    <div class="node n-blue">
+      <h3>③ 招募与基线 M3–M4</h3>
+      <ul><li>筛查、知情同意、基线血压与协变量</li><li>产出：招募率（可行性指标 ①）</li></ul>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node n-amber">
+      <h3>④ 随机分组执行 <span class="tag">时间窗</span></h3>
+      <ul>
+        <li>依已确定随机序列与分配隐藏执行（方案【待补充】）</li>
+        <li>末例入组不晚于 M4 末；否则末次结局将越过 M10</li>
+      </ul>
+    </div>
+
+    <div class="split"></div>
+    <div class="branch" style="max-width:720px;">
+      <div class="col">
+        <div class="b-label">干预组（设计目标）</div>
+        <div class="node n-blue"><h3>培训（单次）＋6 次月度电话</h3><ul><li>标准化家庭血压监测培训</li><li>每人随访 6 个月，共 6 次电话</li></ul></div>
+      </div>
+      <div class="col">
+        <div class="b-label">对照组（设计目标）</div>
+        <div class="node n-gray"><h3>常规管理＋常规健康宣教</h3><ul><li>内容清单【待补充】</li><li>污染风险在局限性中说明</li></ul></div>
+      </div>
+    </div>
+    <div class="split-t"></div>
+
+    <div class="node n-blue">
+      <h3>⑤ 随访 M4–M9（末例顺延至 M10）</h3>
+      <ul><li>每人随访 6 个月、6 次月度电话</li><li>产出：依从率（可行性指标 ②：电话完成率、监测记录完成率）</li></ul>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node n-blue">
+      <h3>⑥ 数据核查（M6 前后）</h3>
+      <ul><li>按数据字典清洗：年龄999 / 6个月SBP 18 / BMI 99 设缺失；性别编码统一</li><li>仅移除逐字段完全一致重复；冲突项列待核；不做均数填补；逐条留痕</li></ul>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node n-blue">
+      <h3>⑦ 末次结局测量 M9–M10</h3>
+      <ul>
+        <li>探索性结局：6 个月收缩压（报告调整 MD 与 95% CI，<b>不作疗效检验</b>）</li>
+        <li>描述性：6 个月达标比例（&lt;140/90 mmHg，阈值依据【待补充】，仅描述）</li>
+        <li>末例末次随访不晚于 M10</li>
+      </ul>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node n-blue">
+      <h3>⑧ 数据锁定（M10 末）</h3>
+      <ul><li>产出：保留率、结局缺失比例（可行性指标 ③④）</li></ul>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node n-amber">
+      <h3>⑨ 分析 M11–M12（按 SAP） <span class="tag">口径已更正</span></h3>
+      <ul>
+        <li>主要分析：可行性指标点估计＋95% CI（Wilson 法）；招募率＝入组/筛查合格，依从率＝完成 6 次电话/应完成，保留率＝完成 6 个月结局/入组</li>
+        <li>探索性：线性回归调整基线 SBP、年龄（方案 A 下可加"中心"）；报告调整 MD、95% CI，不作疗效假设检验、不据 P 值下结论</li>
+        <li>完整病例分析：不称完整 ITT，<b>不宣称无偏</b></li>
+        <li><b>HC3 仅检验异方差稳健性，不解决缺失偏倚</b></li>
+        <li><b>纳入/未纳入者特征比较仅属诊断性描述，不能纠正偏倚</b></li>
+        <li>缺失敏感性方法（多重填补／模式混合／最差情景）<b>待 SAP 指定</b></li>
+        <li>无预设亚组，不做事后亚组分析、不生成事后森林图</li>
+        <li>样本量：可行性精度＋资源论证；目标精度【待确认】、预期率【待确认】、资源上限【待补充】；<span class="strike">388→457 二分类疗效算例</span> 不用于本研究</li>
+      </ul>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node n-green">
+      <h3>⑩ 分析结题 M11–M12 · 产出</h3>
+      <ul>
+        <li>可行性参数：招募率、依从率、保留率、缺失比例</li>
+        <li>6 个月收缩压探索性效应区间（不作疗效结论）</li>
+        <li>确证性试验设计参数：效应量、SD、缺失比例、依从率</li>
+        <li>决策建议：是否开展确证性试验</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    纯 HTML/CSS 离线预览，无外部脚本依赖；Mermaid 源文件见同目录《R6-技术路线.mmd》。
+    教学声明：所有数据与场景均为虚构，血压阈值与流程不得用于指导真实患者诊断或治疗。
+  </footer>
+</div>
+</body>
+</html>
