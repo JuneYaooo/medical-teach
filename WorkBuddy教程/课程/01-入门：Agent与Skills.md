@@ -1,6 +1,14 @@
-# 入门课 在 WorkBuddy 建立医学教学工作空间
+# 入门课：在 WorkBuddy 建立医学教学工作空间
 
 这一课完成一次可复现的小任务：选择本地资料夹，读懂 Skill 的结构，导入纯文本教学技能，再让 WorkBuddy 基于给定来源做一次证据核对。
+
+课前文件：
+
+- [medical-evidence-check/SKILL.md](../实操素材/medical-evidence-check/SKILL.md)：第 2 步要读的技能文件
+- [medical-evidence-check.zip](../实操素材/medical-evidence-check.zip)：第 3 步要上传的技能包
+- [教学事实卡.csv](../实操素材/教学事实卡.csv)：第 4 步核对用的来源
+
+这些文件都已包含在首页的练习包里。解压练习包后，按第 1 步把 WorkBuddy教程 文件夹选为工作空间即可。
 
 ## 五个概念
 
