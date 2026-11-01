@@ -27,11 +27,11 @@ FOCUS = {
     'R7': '把组会转写整理成纪要、负责人和进度表。', 'R8': '提炼审稿回复规则，导入技能并检验边界。',
     'P1': '从模拟对标资料里确定受众、定位和内容支柱。', 'P2': '合并患者问法，保留来源，形成可排序的选题库。',
     'P3': '以事实卡为基础写文章，逐句保留来源与限定。', 'P4': '把一个主题拆成 30 秒脚本和分镜。',
-    'P5': '生成六页图文与竖版海报，逐页检查版式。', 'P6': '检查口播稿、形象参考、语音试听和字幕。',
+    'P5': '生成六页图文与竖版海报，逐页检查版式。', 'P6': '完成口播稿、配音、数字人视频与字幕。',
     'P7': '制作患教单与随访话术，用回授发现歧义。', 'P8': '同一组事实卡生成四类内容，逐句检查一致性。',
     'P9': '把风格和核对规则固化为可复用的技能。'}
 # 00 and 01 have no metadata table in their Markdown.
-EXTRA_META = {'00': {'产出': '选定自己的学习路线'}, '01': {'难度': '1', '产出': '一份入门核对结果 + 一个已安装的教学技能'}}
+EXTRA_META = {'00': {'产出': '选定自己的学习路线'}, '01': {'难度': '1', '产出': '一份入门核对结果 + 一个可用的证据核对技能'}}
 LEVEL = {'1': '入门', '1-2': '基础', '2': '基础', '3': '进阶'}
 
 md = mistune.create_markdown(plugins=['table', 'strikethrough', 'task_lists', 'url'])
@@ -90,23 +90,23 @@ def build_pack():
     target = SITE / PACK_NAME
     readme = f'''WorkBuddy 医学教程 · 练习包
 
-1. 把整个“WorkBuddy教程”文件夹放在你方便找到的位置。
-2. 打开 WorkBuddy，点击“新建任务”→“选择工作空间”→“打开本地文件夹”，选中“WorkBuddy教程”。
+1. 把整个“家庭血压项目”文件夹放在你方便找到的位置。
+2. 打开 WorkBuddy，点击“新建任务”→“选择工作空间”→“打开本地文件夹”，选中“家庭血压项目”。
 3. 打开课程网站，从“01 入门课”开始，把每课的提示词复制到 WorkBuddy。
 
 文件夹说明
-- 实操素材/：每课要读取的练习文件（模拟数据、虚构审稿意见、教学事实卡、教学技能包等）。
-- 演示输出/：空文件夹，你的练习结果会保存在这里。
+- 资料/：每课要读取的练习文件（研究数据、审稿意见、事实卡与证据核对技能包等）。
+- 成果/：空文件夹，你的练习结果会保存在这里。
 - 参考结果/：课程作者实际跑出的结果，用来和你的结果对照。
-  跳过某课时，可把对应文件夹复制到“演示输出/”。例如没做 R4 想直接学 R5，就把“参考结果/R4”复制成“演示输出/R4”。
-  （P6 的样片视频和试听音频体积较大，未放入练习包，可在课程网页上直接播放。）
+  跳过某课时，可把对应文件夹复制到“成果/”。例如没做 R4 想直接学 R5，就把“参考结果/数据分析”复制成“成果/数据分析”。
+  （P6 的口播视频和音频体积较大，未放入练习包，可在课程网页上直接播放。）
 
-研究数据、审稿意见和项目资料均为教学模拟，不代表临床研究证据。
+研究数据与审稿、申报及项目背景资料为合成或虚构材料；文献与事实卡的真实来源另行标注。
 
 课程网站：https://juneyaooo.github.io/medical-teach/
 '''
-    files = [(f, 'WorkBuddy教程/' + str(f.relative_to(SITE))) for f in sorted((SITE / '实操素材').rglob('*')) if f.is_file()]
-    files += [(f, 'WorkBuddy教程/参考结果/' + str(f.relative_to(SITE / '演示输出'))) for f in sorted((SITE / '演示输出').rglob('*'))
+    files = [(f, '家庭血压项目/' + str(f.relative_to(SITE))) for f in sorted((SITE / '资料').rglob('*')) if f.is_file()]
+    files += [(f, '家庭血压项目/参考结果/' + str(f.relative_to(SITE / '成果'))) for f in sorted((SITE / '成果').rglob('*'))
               if f.is_file() and f.stat().st_size < 2_000_000]
     files = [(f, n) for f, n in files if f.name != '.DS_Store']
 
@@ -116,8 +116,8 @@ def build_pack():
         zi.external_attr = (0o40755 if name.endswith('/') else 0o100644) << 16
         return zi
     with zipfile.ZipFile(target, 'w') as z:
-        z.writestr(info('WorkBuddy教程/开始前请读.txt'), readme)
-        z.writestr(info('WorkBuddy教程/演示输出/'), '')
+        z.writestr(info('家庭血压项目/开始前请读.txt'), readme)
+        z.writestr(info('家庭血压项目/成果/'), '')
         for f, name in files: z.writestr(info(name), f.read_bytes())
     return target.stat().st_size
 
@@ -174,18 +174,18 @@ def catalog(prefix=''):
     body = f'''<header class="site-header">{brand(p + '课程目录.html')}<nav aria-label="主导航"><a href="#prepare">开始前准备</a><a href="#research">科研线</a><a href="#public">科普线</a><a href="{GITHUB_URL}">GitHub</a></nav></header>
 <main id="main" class="home"><section class="hero"><div><p class="eyebrow">医学科研 · 患者科普 · WorkBuddy 实操</p><h1>让医学工作流<br>可复现、可核对。</h1><p class="hero-lead">从一份资料到一个可检查的结果。跟着 WorkBuddy 的真实操作，把文献、数据、写作与患者科普，一步一步做清楚。</p>
 <div class="hero-actions"><a class="primary" href="{p}课程/{url(first["html"])}">开始入门课 <span aria-hidden="true">→</span></a>{pack_button(p)}</div>
-<p id="resume" class="resume" hidden></p><p class="hero-meta">19 节课程 · 每课 1 分钟实操录屏 · 可复制提示词 · 参考结果对照</p></div>
+<p id="resume" class="resume" hidden></p><p class="hero-meta">19 节课程 · 配套讲解录屏 · 可复制提示词 · 参考结果对照</p></div>
 <aside class="prepare" id="prepare"><h2>开始前准备</h2><ol>
 <li><span>1</span><div><strong>安装 WorkBuddy</strong><p>课程按 WorkBuddy 5.9.0 录制，界面有差异时以<a href="{WORKBUDDY_URL}">官方说明</a>为准。</p></div></li>
-<li><span>2</span><div><strong>下载练习包并解压</strong><p>得到一个“WorkBuddy教程”文件夹，里面有练习素材、教学技能包和参考结果。</p></div></li>
+<li><span>2</span><div><strong>下载练习包并解压</strong><p>得到一个“家庭血压项目”文件夹，里面有资料、技能包和参考结果。</p></div></li>
 <li><span>3</span><div><strong>把文件夹设为工作空间</strong><p>在 WorkBuddy 点“新建任务”→“选择工作空间”→“打开本地文件夹”，选中它。</p></div></li>
-<li><span>4</span><div><strong>打开一课，照着做</strong><p>先看 1 分钟录屏，再复制提示词到 WorkBuddy，最后打开结果文件核对。</p></div></li>
+<li><span>4</span><div><strong>打开一课，照着做</strong><p>先看讲解录屏，再复制提示词到 WorkBuddy，最后打开结果文件核对。</p></div></li>
 </ol></aside></section>
 {start}
 <div class="catalog-tools"><div><span class="eyebrow">第二步</span><h2>选一条路线</h2><p>两条线可以只学一条；每条线按顺序学，后面的课会用到前面的结果。</p></div><label class="search-label">查找课程<input id="course-search" type="search" placeholder="课程名、编号或关键词" autocomplete="off"></label></div>
 <p id="search-empty" hidden>没有匹配的课程，请试试“数据”“科普”或课程编号。</p>
 <div class="tracks">{tracks}</div>
-<aside class="scope-note"><strong>关于练习素材</strong><p>统计数据、审稿意见和项目资料为教学模拟；医学事实卡附公开来源，来源核对不等于医生审核。录屏是无旁白的实操节选，完整提示词见各课正文。P6 的已有形象样片与本课新稿试听分别标明。学习进度只保存在你当前使用的浏览器里。</p></aside></main>
+<aside class="scope-note"><strong>关于练习素材</strong><p>统计数据、审稿意见和项目资料为教学模拟；医学事实卡附公开来源，来源核对不等于医生审核。录屏带讲解旁白和字幕，完整提示词见各课正文。P6 提供本次口播稿生成的数字人成片、字幕和配音文件。学习进度只保存在你当前使用的浏览器里。</p></aside></main>
 <footer class="site-footer"><span>医学工作流课堂 · 按步骤学习，依据结果核对。</span><a href="{GITHUB_URL}">查看 Markdown 与课程文件</a></footer>'''
     return shell('课程目录', body, prefix, 'home-page')
 
@@ -240,19 +240,21 @@ def overview(l):
     if l['code'] == '00':
         how = '读完路线说明后，回到目录先学 01 入门课，再选科研线或科普线。'
     elif l['code'] == '01':
-        how = '先看下面 1 分钟录屏，再按第 1–4 步在 WorkBuddy 里操作，最后对照“自查与练习”检查结果。'
+        how = '先看下面的讲解录屏，再按第 1–4 步在 WorkBuddy 里操作，最后对照“自查与练习”检查结果。'
     else:
-        how = '先看 1 分钟录屏了解全过程；再把“快速实操”里的提示词依次复制到 WorkBuddy，每步完成后打开结果文件核对；最后读“完整方法”，换成自己的课题再做一次。'
+        how = '先看讲解录屏了解全过程；再把“快速实操”里的提示词依次复制到 WorkBuddy，每步完成后打开结果文件核对；最后读“完整方法”，换成自己的课题再做一次。'
     return (f'<section class="lesson-overview" aria-label="本课概览">' + (f'<dl>{rows}</dl>' if rows else '') +
             f'<p class="how"><strong>怎么学</strong>{how}</p><div class="overview-actions">{pack_button("../")}'
-            f'<a class="secondary" href="#recording">看 1 分钟录屏</a></div></section>')
+            f'<a class="secondary" href="#recording">看讲解录屏</a></div></section>')
 
 
 def recording(l):
     chapters = l['chapters']
-    out = (f'<section id="recording" class="recording"><h2>实操录屏</h2><p>无旁白，约 {round(chapters[-1]["end"] / 60) or 1} 分钟。点下面的阶段可以直接跳过去。</p>'
+    out = (f'<section id="recording" class="recording"><h2>实操录屏</h2><p>带旁白和字幕，约 {round(chapters[-1]["end"] / 60) or 1} 分钟。点下面的阶段可以直接跳过去。</p>'
            f'<video id="lesson-video" controls playsinline preload="metadata" aria-label="{l["code"]} WorkBuddy 实操录屏">'
-           f'<source src="../录屏/{url(l["video"].name)}" type="video/mp4"></video><div class="chapters" aria-label="录屏章节">')
+           f'<source src="../录屏/{url(l["video"].name)}" type="video/mp4">'
+           f'<track kind="captions" src="../录屏/{url(l["video"].with_suffix(".vtt").name)}" srclang="zh-CN" label="旁白字幕"></video>'
+           f'<div class="chapters" aria-label="录屏章节">')
     for ch in chapters:
         s = int(ch['start'])
         out += f'<button type="button" data-seek="{ch["start"]}"><span>{s // 60:02}:{s % 60:02}</span>{esc(ch["title"])}</button>'

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第2页 · 测量前的准备</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { background:#E8E5DE; }
+  .page {
+    width:1080px; height:1920px; background:#FDFBF7;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    color:#1C2430; position:relative; padding:72px 64px; display:flex; flex-direction:column;
+  }
+  .topbar { display:flex; align-items:center; justify-content:space-between; }
+  .step-badge {
+    background:#14406E; color:#fff; font-size:32px; font-weight:700;
+    padding:14px 34px; border-radius:999px; letter-spacing:2px;
+  }
+  .dots { display:flex; gap:14px; }
+  .dot { width:18px; height:18px; border-radius:50%; background:#D8D3C6; }
+  .dot.on { background:#14406E; }
+  h1 { font-size:72px; font-weight:800; color:#14406E; margin-top:40px; letter-spacing:2px; }
+  .rule { width:140px; height:10px; background:#C0392B; border-radius:5px; margin-top:24px; }
+  .blocks { margin-top:44px; display:flex; flex-direction:column; gap:40px; }
+  .block {
+    background:#fff; border:4px solid #E3E0D8; border-radius:28px;
+    padding:44px 40px; display:flex; gap:36px; align-items:center; height:520px;
+  }
+  .bignum {
+    min-width:250px; text-align:center; color:#C0392B; font-weight:900;
+    font-size:92px; line-height:1.1;
+  }
+  .bignum small { display:block; font-size:40px; color:#1C2430; font-weight:800; margin-top:8px; }
+  .bignum.green { color:#1E7A46; }
+  .items { font-size:38px; line-height:1.85; font-weight:600; }
+  .items .no { color:#C0392B; font-weight:800; }
+  .note {
+    margin-top:36px; font-size:28px; color:#5A6472; background:#F4F0E6;
+    border-left:10px solid #F0B429; border-radius:0 16px 16px 0; padding:18px 26px; line-height:1.6;
+  }
+  .src {
+    position:absolute; left:64px; right:64px; bottom:52px;
+    font-size:24px; color:#5A6472; border-top:2px solid #E3E0D8; padding-top:20px; line-height:1.5;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <div class="step-badge">第 2 步 · 共 6 步</div>
+    <div class="dots">
+      <div class="dot"></div><div class="dot on"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+
+  <h1>测量前的准备</h1>
+  <div class="rule"></div>
+
+  <div class="blocks">
+    <div class="block">
+      <div class="bignum">30<small>分钟前</small></div>
+      <svg width="120" height="380" viewBox="0 0 120 380">
+        <!-- 香烟 禁止 -->
+        <g transform="translate(10,20)">
+          <rect x="8" y="46" width="80" height="24" rx="8" fill="#B98A5A"/>
+          <rect x="66" y="46" width="22" height="24" rx="6" fill="#E8E2D4"/>
+          <path d="M 46 38 C 40 26 52 22 46 10" fill="none" stroke="#9AA3AD" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="48" cy="46" r="46" fill="none" stroke="#C0392B" stroke-width="10"/>
+          <line x1="15" y1="79" x2="81" y2="13" stroke="#C0392B" stroke-width="10" stroke-linecap="round"/>
+        </g>
+        <!-- 咖啡 禁止 -->
+        <g transform="translate(10,140)">
+          <rect x="14" y="28" width="66" height="52" rx="10" fill="#8A5A3B"/>
+          <path d="M 80 36 C 102 36 102 66 80 66" fill="none" stroke="#8A5A3B" stroke-width="9"/>
+          <path d="M 40 16 C 36 8 44 6 40 -2" fill="none" stroke="#9AA3AD" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="48" cy="46" r="46" fill="none" stroke="#C0392B" stroke-width="10"/>
+          <line x1="15" y1="79" x2="81" y2="13" stroke="#C0392B" stroke-width="10" stroke-linecap="round"/>
+        </g>
+        <!-- 跑步 禁止 -->
+        <g transform="translate(10,262)">
+          <circle cx="58" cy="12" r="12" fill="#1C2430"/>
+          <path d="M 40 84 L 54 46 L 74 58 L 92 40" fill="none" stroke="#1C2430" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 54 46 L 32 56 M 74 58 L 88 80 M 40 84 L 62 92" stroke="#1C2430" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="48" cy="50" r="46" fill="none" stroke="#C0392B" stroke-width="10"/>
+          <line x1="15" y1="83" x2="81" y2="17" stroke="#C0392B" stroke-width="10" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <div class="items">
+        <span class="no">不吸烟</span><br>
+        <span class="no">避免含咖啡因饮料</span><br>
+        <span class="no">不运动</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="bignum green">≥5<small>分钟安静休息</small></div>
+      <svg width="120" height="380" viewBox="0 0 120 380">
+        <!-- 卫生间（排空膀胱） -->
+        <g transform="translate(14,16)">
+          <rect x="10" y="20" width="76" height="64" rx="10" fill="none" stroke="#1E7A46" stroke-width="8"/>
+          <circle cx="48" cy="42" r="9" fill="#1E7A46"/>
+          <rect x="34" y="56" width="28" height="16" rx="6" fill="#1E7A46"/>
+        </g>
+        <!-- 静坐休息 -->
+        <g transform="translate(14,140)">
+          <circle cx="52" cy="22" r="13" fill="#1C2430"/>
+          <path d="M 52 36 L 52 74 L 30 96 M 52 74 L 74 96 M 44 50 L 24 60 M 60 50 L 80 60"
+                stroke="#1C2430" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M 10 96 L 96 96" stroke="#C9A876" stroke-width="8" stroke-linecap="round"/>
+        </g>
+        <!-- 时钟 -->
+        <g transform="translate(14,256)">
+          <circle cx="48" cy="50" r="40" fill="none" stroke="#1E7A46" stroke-width="8"/>
+          <line x1="48" y1="50" x2="48" y2="26" stroke="#1E7A46" stroke-width="7" stroke-linecap="round"/>
+          <line x1="48" y1="50" x2="66" y2="58" stroke="#1E7A46" stroke-width="7" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <div class="items">
+        <b>排空膀胱</b><br>
+        安静休息<br>
+        <b style="color:#1E7A46">至少 5 分钟</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">个人特殊情况请咨询医生。</div>
+
+  <div class="src">来源：美国心脏协会（AHA）· Monitoring Your Blood Pressure at Home · heart.org</div>
+</div>
+</body>
+</html>

@@ -94,8 +94,8 @@ if (toc && !narrow) toc.open = true;
 const video = document.querySelector('#lesson-video');
 if (video) {
   const chapters = JSON.parse(document.querySelector('#video-chapters').textContent);
-  const track = video.addTextTrack('captions', '操作提示', 'zh-CN');
-  track.mode = 'showing';
+  const track = video.addTextTrack('chapters', '操作章节', 'zh-CN');
+  track.mode = 'hidden';
   chapters.forEach(c => track.addCue(new VTTCue(c.start, Math.max(c.start + .001, c.end - .05), c.title)));
   document.querySelectorAll('[data-seek]').forEach(button => button.addEventListener('click', () => {
     const start = Number(button.dataset.seek);

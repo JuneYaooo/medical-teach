@@ -1,8 +1,0 @@
-﻿﻿序号,脚本原句,事实卡编号,事实卡原文,来源,来源位置,支持程度,核对要点,问题与修改建议
-1,晚上八点，血压计摆上桌。,无,无,无,无,不适用,非医学论断，属画面设定,无需事实卡支持；不涉及医学信息
-2,测量前，先排空膀胱，安静休息至少5分钟。,F05,测量前排空膀胱并安静休息至少5分钟。,https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home,Home monitoring / How to use a home blood pressure monitor,支持,数字与单位核对：至少5分钟与原卡一致；适用范围：一般家庭血压测量准备,无改动；脚本保留原卡完整含义
-3,测量时保持安静，不说话，也不用手机。,F08,测量期间保持安静，不说话或使用手机。,https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home,Home monitoring / How to use a home blood pressure monitor,支持,同义改写核对：测量时=测量期间；不用手机=不使用手机,无改动；口径一致
-4,每次测量取两次读数，间隔1分钟。,F09,每次测量取两次读数，间隔1分钟，并记录结果。,https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home,Home monitoring / How to use a home blood pressure monitor,支持,数字核对：两次、间隔1分钟与原卡一致；"并记录结果"由镜头5单独呈现,无改动；两次+间隔1分钟+记录结果三要素齐全
-5,测完，把两次结果都记下来。,F09,每次测量取两次读数，间隔1分钟，并记录结果。,https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home,Home monitoring / How to use a home blood pressure monitor,支持,记录结果与"两次读数"对应，未夸大为长期记录义务,无改动；F09适用限定：具体频次和疗程由医疗人员确定，脚本未涉及
-6,整体核查：除上述句子外无其他医学陈述,——,F05/F08/F09,https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home,Home monitoring / How to use a home blood pressure monitor,支持,检查是否新增事实：开头与画面设定无医学论断；删改清单中已移除"读数可信""方法对了才有参考价值"等无卡评价性表述,已通过；未新增医学事实
-7,流程声明,——,——,——,——,不适用,教学来源核对≠医生签署；字数与时长均为人工预估非实测,公开发布前需医生签署；成片后需实测时长复核

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高血压科普选题看板</title>
+<style>
+:root{
+  --bg:#f5f7fa; --card:#ffffff; --line:#e3e8ef; --ink:#1f2937; --sub:#6b7280;
+  --blue:#2563eb; --blue-bg:#eff6ff; --green:#15803d; --green-bg:#f0fdf4;
+  --amber:#b45309; --amber-bg:#fffbeb; --red:#b91c1c; --red-bg:#fef2f2;
+  --grey-bg:#f3f4f6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:22px;margin-bottom:4px}
+.sub{color:var(--sub);font-size:13px;margin-bottom:16px}
+.sub a{color:var(--blue);font-weight:600}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px;min-width:130px}
+.stat .n{font-size:22px;font-weight:700}
+.stat .l{font-size:12px;color:var(--sub)}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:14px}
+.toolbar input[type=search]{flex:1 1 220px;min-width:200px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px}
+.toolbar select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#fff}
+.toolbar .count{margin-left:auto;color:var(--sub);font-size:13px;white-space:nowrap}
+.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tabs button{padding:8px 16px;border:1px solid var(--line);background:var(--card);border-radius:999px;cursor:pointer;font-size:14px;color:var(--ink)}
+.tabs button.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+section{display:none}
+section.show{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card h3{font-size:15px;line-height:1.4}
+.no{color:var(--sub);font-size:12px;white-space:nowrap}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.b{font-size:12px;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.b.score5{background:var(--red-bg);color:var(--red);font-weight:700}
+.b.score4{background:var(--amber-bg);color:var(--amber);font-weight:600}
+.b.score3,.b.score2{background:var(--blue-bg);color:var(--blue)}
+.b.score1,.b.score0{background:var(--grey-bg);color:var(--sub)}
+.b.evok{background:var(--green-bg);color:var(--green)}
+.b.evwait{background:var(--amber-bg);color:var(--amber)}
+.b.st-pub{background:var(--green-bg);color:var(--green)}
+.b.st-hold{background:var(--grey-bg);color:var(--sub)}
+.b.review{background:var(--red-bg);color:var(--red);font-weight:600}
+.b.plain{background:var(--grey-bg);color:var(--sub)}
+.raw{background:var(--grey-bg);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:8px 10px;font-size:13px;color:#374151;margin:8px 0}
+.meta{font-size:12.5px;color:var(--sub);margin:3px 0}
+.meta b{color:var(--ink);font-weight:600}
+.detail{display:none;border-top:1px dashed var(--line);margin-top:8px;padding-top:8px}
+.card.open .detail{display:block}
+.toggle{margin-top:6px;background:none;border:none;color:var(--blue);cursor:pointer;font-size:13px;padding:0}
+.detail .meta{white-space:normal}
+.scoreline{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.scoreline .b{font-size:11.5px}
+h2{font-size:18px;margin:0 0 4px}
+.sec-sub{color:var(--sub);font-size:13px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13px}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--grey-bg);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.weeksum{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.weeksum .stat .n{font-size:18px}
+.note{background:var(--amber-bg);border:1px solid #fde68a;border-radius:10px;padding:12px 14px;font-size:13px;margin:14px 0}
+.reviewwarn{background:var(--red-bg);border:1px solid #fecaca;border-radius:10px;padding:12px 14px;font-size:13px;margin-bottom:14px}
+.notes{margin-top:24px}
+.notes .kv{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+.notes .kv b{display:block;margin-bottom:2px}
+.empty{color:var(--sub);text-align:center;padding:30px;background:var(--card);border:1px dashed var(--line);border-radius:10px}
+@media print{.toolbar,.tabs,.toggle{display:none}.detail{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>高血压科普选题看板</h1>
+  <div class="sub">数据来源：<a href="高血压科普选题库.xlsx" download>高血压科普选题库.xlsx</a>（同目录，点击下载）· 与工作簿实际数据一致生成 · 事实卡状态：来源核对、医生未签署</div>
+  <div class="stats" id="stats"></div>
+
+  <div class="tabs" id="tabs">
+    <button data-tab="library" class="on">选题库（35题）</button>
+    <button data-tab="plan">首月安排（每周120分钟）</button>
+    <button data-tab="review">专业复核（5题）</button>
+    <button data-tab="pending">待核验（21题）</button>
+    <button data-tab="notes">口径与规则</button>
+  </div>
+
+  <section id="tab-library" class="show">
+    <div class="toolbar">
+      <input type="search" id="kw" placeholder="搜索：标题 / 患者原话 / 来源编号(Q01) / 内容角度 / 事实卡(F06)…">
+      <select id="fCat"><option value="">全部分类</option></select>
+      <select id="fEv"><option value="">全部证据状态</option><option>已核对</option><option>待核验</option></select>
+      <select id="fStatus"><option value="">全部状态</option></select>
+      <select id="fReview"><option value="">复核筛选全部</option><option value="是">仅需专业复核</option><option value="否">无需复核</option></select>
+      <select id="sort">
+        <option value="score">按总分降序</option>
+        <option value="freq">按合计频次降序</option>
+        <option value="no">按序号</option>
+      </select>
+      <span class="count" id="cnt"></span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="tab-plan">
+    <h2>首月优先清单</h2>
+    <div class="sec-sub">每周约束：2条制作（各45分钟）+ 2项核验（各15分钟）= <b>120分钟</b>（约2小时），见下方周用时核对；"备选"行不计入。</div>
+    <table><thead><tr><th>周次</th><th>类型</th><th>序号</th><th>选题标题</th><th>总分</th><th>用时</th><th>证据状态</th><th>事实卡</th><th>任务说明</th><th>状态</th></tr></thead>
+    <tbody id="planBody"></tbody></table>
+    <div class="weeksum" id="weeksum"></div>
+    <div class="note" id="planNote"></div>
+  </section>
+
+  <section id="tab-review">
+    <h2>专业复核清单</h2>
+    <div class="reviewwarn">以下选题发布前必须经对应专业医生复核；复核通过后在Excel"选题库"中将"需专业复核"改为"否"。事实卡（F01–F10）当前状态为"来源核对、医生未签署"。</div>
+    <table><thead><tr><th>序号</th><th>选题标题</th><th>患者原话</th><th>来源</th><th>频次</th><th>支持事实卡</th><th>必须复核的原因</th><th>建议复核人</th></tr></thead>
+    <tbody id="reviewBody"></tbody></table>
+  </section>
+
+  <section id="tab-pending">
+    <h2>待核验清单</h2>
+    <div class="note">核验通过后：①在Excel选题库补F编号与支持范围、证据状态改"已核对"、证据充分按规则重评；②从本表移除。医学表述不得凭空补写；医学结论缺依据时保持待核验或放弃，不以内容标签替代依据。</div>
+    <table><thead><tr><th>序号</th><th>选题标题</th><th>患者原话</th><th>来源</th><th>频次</th><th>待核验点</th><th>核验前处理</th></tr></thead>
+    <tbody id="pendingBody"></tbody></table>
+  </section>
+
+  <section id="tab-notes">
+    <h2>口径与规则（摘自Excel"说明"页）</h2>
+    <div class="notes" id="notesList"></div>
+  </section>
+</div>
+
+<script>
+const D = {"topics": [{"no": 1, "cat": "家庭测量", "title": "测前要安静坐多久", "raw": "“家里量血压要坐多久”", "src": "Q01", "freq": 8, "aud": "患者及照护者", "q": "测量前需要静坐休息多久，怎么安排测前准备", "angle": "按F05给出“安静休息至少5分钟”的标准与简易计时方法；测前顺序：排尿→静坐5分钟→测量", "cards": "F05", "scope": "测量前排空膀胱并安静休息至少5分钟", "ev": "已核对", "s1": 1, "s2": 1, "s3": 1, "s4": 1, "s5": 0, "score": 4, "reason": "频次中等；F05直接支持测前静坐5分钟，准确性基础内容", "status": "未开始", "review": "否"}, {"no": 2, "cat": "家庭测量", "title": "刚运动完能不能量", "raw": "“刚运动完能不能量”", "src": "Q02", "freq": 18, "aud": "患者", "q": "运动后需要间隔多久才能测量", "angle": "按F04给出“测量前30分钟避免运动”的要求；说明同一要求覆盖吸烟与含咖啡因饮料；不举行走/家务等具体等待示例（卡内未覆盖，需补充依据后再写）", "cards": "F04", "scope": "测量前30分钟避免吸烟、含咖啡因饮料和运动", "ev": "已核对", "s1": 2, "s2": 1, "s3": 1, "s4": 0, "s5": 0, "score": 4, "reason": "高频；F04直接支持30分钟间隔，测前清单核心内容", "status": "未开始", "review": "否"}, {"no": 3, "cat": "家庭测量", "title": "喝咖啡后多久能量", "raw": "“喝咖啡后多久量”", "src": "Q03", "freq": 2, "aud": "患者", "q": "喝含咖啡因饮料后需间隔多久测量", "angle": "按F04：含咖啡因饮料与运动同列，测量前30分钟避免；可与“运动后”互相引用但保留独立选题", "cards": "F04", "scope": "测量前30分钟避免吸烟、含咖啡因饮料和运动", "ev": "已核对", "s1": 0, "s2": 1, "s3": 1, "s4": 0, "s5": 0, "score": 2, "reason": "低频；F04直接支持，一句话可讲清，适合短内容", "status": "未开始", "review": "否"}, {"no": 4, "cat": "家庭测量", "title": "袖带隔着衣服量行不行", "raw": "“袖带隔着衣服行吗”；“量血压前要脱外套吗”", "src": "Q04、Q35", "freq": 20, "aud": "患者及照护者", "q": "袖带与衣物的关系，冬季怎么处理", "angle": "统一口径：露出测量的上臂，袖带按设备说明接触皮肤（F06：袖带直接接触上臂皮肤，不隔衣测量）；不将挽袖或只脱外套写成通用解决办法", "cards": "F06", "scope": "袖带直接接触上臂皮肤，不隔衣测量；按设备说明正确放置", "ev": "已核对", "s1": 2, "s2": 1, "s3": 1, "s4": 1, "s5": 0, "score": 5, "reason": "高频；F06直接支持不隔衣测量，秋冬实用，全库最高分", "status": "未开始", "review": "否"}, {"no": 5, "cat": "家庭测量", "title": "左右手应该选哪边", "raw": "“左右手应该选哪边”", "src": "Q05", "freq": 4, "aud": "患者", "q": "首次测量应选哪只手臂，之后是否固定", "angle": "拟讲首次双臂都测、后续固定同一手臂；双臂测量与固定手臂的具体建议卡内无依据，先核验再制作", "cards": "—", "scope": "事实卡未覆盖双臂测量建议", "ev": "待核验", "s1": 0, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 1, "reason": "低频；事实卡未覆盖，待核验", "status": "暂缓", "review": "否"}, {"no": 6, "cat": "家庭测量", "title": "家用血压计怎么买", "raw": "“血压计怎么买”", "src": "Q06", "freq": 15, "aud": "患者及照护者", "q": "选什么类型、看什么标准、袖带怎么配", "angle": "按F03：选经验证的上臂式自动血压计、袖带尺寸合适；不推荐品牌；具体认证标准名称需补充核验后再写入", "cards": "F03", "scope": "选用经验证的上臂式自动血压计，袖带尺寸应合适", "ev": "已核对", "s1": 1, "s2": 1, "s3": 1, "s4": 1, "s5": 0, "score": 4, "reason": "中高频；F03直接支持上臂式与经验证要求，决策型基础内容", "status": "未开始", "review": "否"}, {"no": 7, "cat": "家庭测量", "title": "袖带太小怎么办", "raw": "“袖带太小怎么办”", "src": "Q07", "freq": 13, "aud": "患者及照护者", "q": "袖带不合适会怎样，如何选对袖带", "angle": "按F03强调袖带尺寸应合适；臂围/尺寸的具体测量方法卡内未覆盖，需补充依据后再写；“过小导致读数偏高”的方向性结论同样待核验后补充", "cards": "F03", "scope": "袖带尺寸应合适；特殊人群需额外确认设备适用性", "ev": "已核对", "s1": 1, "s2": 1, "s3": 1, "s4": 1, "s5": 0, "score": 4, "reason": "中频；F03支持“尺寸应合适”，影响准确性且常被忽略", "status": "未开始", "review": "否"}, {"no": 8, "cat": "家庭测量", "title": "第一次数字高，要不要重测", "raw": "“第一次数字高要不要重测”", "src": "Q08", "freq": 14, "aud": "患者及照护者", "q": "首次读数偏高时怎么办", "angle": "按F09：每次测量本就取两次读数并记录；按F10：不能仅凭单次读数自行判断；“偏高是否需额外加测”“两次如何取值”不在卡内，不使用“取平均”表述", "cards": "F09、F10", "scope": "每次测量取两次读数，间隔1分钟，并记录结果；不能仅凭单次读数自行诊断", "ev": "已核对", "s1": 1, "s2": 1, "s3": 1, "s4": 1, "s5": 0, "score": 4, "reason": "中高频；F09/F10支持标准流程与单次不足判断；取值方式待核验", "status": "未开始", "review": "否"}, {"no": 9, "cat": "家庭测量", "title": "两次测量间隔多久", "raw": "“两次间隔多久”", "src": "Q09", "freq": 11, "aud": "患者及照护者", "q": "同一次测量中两次读数间隔多久", "angle": "按F09直接回答：间隔1分钟，并记录两次结果；不说“取平均”", "cards": "F09", "scope": "每次测量取两次读数，间隔1分钟，并记录结果", "ev": "已核对", "s1": 1, "s2": 1, "s3": 1, "s4": 0, "s5": 0, "score": 3, "reason": "中频；F09直接支持间隔1分钟并记录", "status": "未开始", "review": "否"}, {"no": 10, "cat": "家庭测量", "title": "一天量几次、什么时候量", "raw": "“一天量几次”", "src": "Q10", "freq": 16, "aud": "患者及照护者", "q": "每日测量次数和时段怎么安排", "angle": "拟讲早晚各一次、固定时段的常规安排；但F09明确“具体频次和疗程由医疗人员确定”，卡内无日频次依据，先核验再制作", "cards": "—", "scope": "F09限定：具体频次和疗程由医疗人员确定，卡内无日频次", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 1, "s5": 0, "score": 3, "reason": "高频但卡内无日频次依据，待核验后再做", "status": "暂缓", "review": "否"}, {"no": 11, "cat": "家庭测量", "title": "测量能聊天吗", "raw": "“测量能聊天吗”", "src": "Q15", "freq": 2, "aud": "患者及照护者", "q": "测量期间能否说话、用手机", "angle": "按F08：测量期间保持安静、不说话或使用手机；一句话讲清，适合短内容", "cards": "F08", "scope": "测量期间保持安静，不说话或使用手机", "ev": "已核对", "s1": 0, "s2": 1, "s3": 1, "s4": 0, "s5": 0, "score": 2, "reason": "低频；F08直接支持，短内容", "status": "未开始", "review": "否"}, {"no": 12, "cat": "家庭测量", "title": "手臂怎么放、要抬多高", "raw": "“手臂应该抬多高”", "src": "Q16", "freq": 16, "aud": "患者及照护者", "q": "测量时手臂的正确位置和高度", "angle": "按F07：手臂有支撑、袖带中部与心脏同高；演示符合该要求的桌面/扶手摆放对比；更多摆放技巧卡内未覆盖，需补充依据后再写", "cards": "F07", "scope": "手臂有支撑，袖带中部与心脏同高", "ev": "已核对", "s1": 1, "s2": 1, "s3": 1, "s4": 1, "s5": 0, "score": 4, "reason": "高频；F07直接支持，演示型内容易出彩", "status": "未开始", "review": "否"}, {"no": 13, "cat": "家庭测量", "title": "腿可以翘着吗", "raw": "“腿可以翘着吗”", "src": "Q17", "freq": 8, "aud": "患者及照护者", "q": "跷腿对读数有多大影响", "angle": "拟讲跷腿的影响与标准坐姿；腿部摆放要求卡内未覆盖，先核验再制作", "cards": "—", "scope": "事实卡仅覆盖手臂支撑（F07），未覆盖腿部", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 2, "reason": "中频；卡内未覆盖坐姿腿部要求，待核验", "status": "暂缓", "review": "否"}, {"no": 14, "cat": "家庭测量", "title": "没有靠背行不行", "raw": "“没有靠背行不行”", "src": "Q18", "freq": 2, "aud": "患者及照护者", "q": "无靠背时怎么测", "angle": "拟讲背部支撑要求与替代做法；卡内未覆盖，先核验再制作", "cards": "—", "scope": "事实卡未覆盖背部支撑", "ev": "待核验", "s1": 0, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 1, "reason": "低频；卡内未覆盖，待核验", "status": "暂缓", "review": "否"}, {"no": 15, "cat": "家庭测量", "title": "憋尿会影响读数吗", "raw": "“憋尿会影响吗”", "src": "Q19", "freq": 6, "aud": "患者", "q": "膀胱充盈是否影响读数，测前要不要排尿", "angle": "按F05：测量前排空膀胱；纳入测前检查清单，与坐多久合成测前准备合集素材", "cards": "F05", "scope": "测量前排空膀胱并安静休息至少5分钟", "ev": "已核对", "s1": 0, "s2": 1, "s3": 1, "s4": 0, "s5": 0, "score": 2, "reason": "低频；F05直接支持，一句话讲清", "status": "未开始", "review": "否"}, {"no": 16, "cat": "家庭测量", "title": "一量就紧张、数字偏高怎么办", "raw": "“测量时紧张怎么办”", "src": "Q20", "freq": 4, "aud": "患者", "q": "紧张情绪导致读数偏高怎么缓解", "angle": "拟给放松做法与“越测越慌”的应对；情绪影响无量化依据，先核验再制作，表述须谨慎", "cards": "—", "scope": "事实卡未覆盖情绪影响", "ev": "待核验", "s1": 0, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 1, "reason": "低频；情绪影响无量化依据，表述需谨慎", "status": "暂缓", "review": "否"}, {"no": 17, "cat": "家庭测量", "title": "手腕式和上臂式一样吗", "raw": "“手腕式和上臂式一样吗”", "src": "Q21", "freq": 14, "aud": "患者及照护者", "q": "两种机型的准确性和适用人群差异", "angle": "F03仅支持“选经验证的上臂式”；腕式准确性对比与适用人群差异卡内未覆盖，先核验再制作", "cards": "F03（部分）", "scope": "仅支持推荐经验证的上臂式，未比较腕式准确性", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 2, "reason": "中频；F03仅支持选上臂式，对比内容待核验", "status": "暂缓", "review": "否"}, {"no": 18, "cat": "家庭测量", "title": "血压计用多久要核对一次", "raw": "“设备多久核对”", "src": "Q24", "freq": 11, "aud": "患者及照护者", "q": "家用设备多久校验、怎么发现不准", "angle": "F10支持“携带测量记录和设备与医疗人员核对”这一做法；核对/校准周期卡内未定，先核验再制作", "cards": "F10（部分）", "scope": "支持携带记录和设备与医疗人员核对；周期未定", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 2, "reason": "中频；核对周期无依据，F10仅支持可携设备核对", "status": "暂缓", "review": "否"}, {"no": 19, "cat": "家庭测量", "title": "每次都测五遍好吗", "raw": "“每次都测五遍好吗”", "src": "Q32", "freq": 8, "aud": "患者", "q": "反复多次测量是否更准，测多少遍合适", "angle": "按F09：标准做法为每次取两次读数、间隔1分钟；“测五遍是否有害”卡内未覆盖，不展开", "cards": "F09", "scope": "每次测量取两次读数，间隔1分钟，并记录结果", "ev": "已核对", "s1": 1, "s2": 1, "s3": 1, "s4": 0, "s5": 0, "score": 3, "reason": "中低频；F09支持标准两次读数，过度测量影响不展开", "status": "未开始", "review": "否"}, {"no": 20, "cat": "记录随访", "title": "血压记录要保留哪些数值", "raw": "“记录保留哪些数值”", "src": "Q22", "freq": 14, "aud": "患者及照护者", "q": "一次记录应包含哪些信息才对复诊有用", "angle": "F09支持“记录结果”、F10支持“携带记录核对”，但记录字段卡内未定；拟给记录模板，先核验字段依据", "cards": "F09、F10（部分）", "scope": "支持需记录结果并携带记录；具体字段未定", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 1, "s5": 0, "score": 3, "reason": "中频；记录字段无直接依据，待核验", "status": "暂缓", "review": "否"}, {"no": 21, "cat": "记录随访", "title": "纸质记录还是手机记录", "raw": "“纸质记录还是手机记录”", "src": "Q23", "freq": 13, "aud": "患者（含不熟悉手机的老人）", "q": "两种记录方式怎么选，老人用哪个顺手", "angle": "拟对比两种方式优劣、推荐“老人顺手优先、能坚持的才有效”；无权威依据支撑单一答案，核验通过前不得发布", "cards": "—", "scope": "无权威依据，属经验型内容", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 2, "reason": "中频；无权威依据支撑单一答案，需先核验", "status": "暂缓", "review": "否"}, {"no": 22, "cat": "记录随访", "title": "早上和晚上数字不同正常吗", "raw": "“晚上和早上不同正常吗”", "src": "Q25", "freq": 15, "aud": "患者及照护者", "q": "血压早晚波动的规律，差异多大算正常", "angle": "拟讲昼夜波动规律与合理范围、何时告诉医生；卡内未覆盖，先核验再制作", "cards": "—", "scope": "事实卡未覆盖血压昼夜变异", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 1, "s5": 0, "score": 3, "reason": "中高频；昼夜波动规律卡内未覆盖，待核验", "status": "暂缓", "review": "否"}, {"no": 23, "cat": "记录随访", "title": "漏记一天怎么办", "raw": "“漏记一天怎么办”", "src": "Q27", "freq": 19, "aud": "患者及照护者", "q": "忘记记录要不要补，会不会影响医生判断", "angle": "拟讲“漏一两天不影响趋势判断”+防漏技巧；“漏记影响”的解释口径无卡内依据，先核验再制作", "cards": "—", "scope": "事实卡未覆盖漏记情形", "ev": "待核验", "s1": 2, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 3, "reason": "高频焦虑型；解释口径无依据，待核验", "status": "暂缓", "review": "否"}, {"no": 24, "cat": "记录随访", "title": "能只记最低的一次吗", "raw": "“能只记最低的一次吗”", "src": "Q31", "freq": 6, "aud": "患者", "q": "挑着记录会不会误导医生和用药", "angle": "F10支持“不能仅凭单次读数自行诊断”，可作为引导如实记录的出发点；“挑选记录的危害”无直接条文，先核验", "cards": "F10（部分）", "scope": "不能仅凭单次读数自行诊断；挑选记录无直接条文", "ev": "待核验", "s1": 0, "s2": 1, "s3": 0, "s4": 1, "s5": 0, "score": 2, "reason": "低频；关乎诚信记录，但直接依据不足，待核验", "status": "暂缓", "review": "否"}, {"no": 25, "cat": "特殊情况", "title": "老人手抖，怎么测才准", "raw": "“老人手抖怎么测”", "src": "Q14", "freq": 6, "aud": "照护者", "q": "手抖老人能否独立完成测量及替代办法", "angle": "拟给照护者协助测量、全自动上臂式对动作依赖低等替代做法；卡内未覆盖，核验通过后再制作", "cards": "—", "scope": "事实卡未覆盖", "ev": "待核验", "s1": 0, "s2": 1, "s3": 0, "s4": 1, "s5": 0, "score": 2, "reason": "低频但直击60+受众痛点；卡内未覆盖，待核验", "status": "暂缓", "review": "否"}, {"no": 26, "cat": "特殊情况", "title": "头晕但量出来正常，怎么办", "raw": "“头晕但数字正常怎么办”", "src": "Q26", "freq": 9, "aud": "患者及照护者", "q": "症状与读数不一致时该信哪个、要不要就医", "angle": "F01/F10提供安全框架（家庭监测不替代随访、不能仅凭单次读数诊断）；症状处理无依据，须医生复核表述", "cards": "F01、F10（部分）", "scope": "仅提供安全引导框架，症状判断无依据", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 1, "s5": 1, "score": 2, "reason": "涉就医安全；F01/F10仅安全框架，须医生复核", "status": "暂缓", "review": "是"}, {"no": 27, "cat": "特殊情况", "title": "出门旅游要不要带血压计", "raw": "“旅游带不带设备”", "src": "Q28", "freq": 8, "aud": "患者及照护者", "q": "旅行期间是否坚持测量及携带建议", "angle": "拟讲作息改变期间测量的意义与便携收纳做法；卡内未覆盖，核验通过后再制作", "cards": "—", "scope": "事实卡未覆盖", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 2, "reason": "中低频轻松话题；卡内未覆盖，待核验", "status": "暂缓", "review": "否"}, {"no": 28, "cat": "特殊情况", "title": "一家人共用一台血压计行吗", "raw": "“几个人共用一台行吗”", "src": "Q29", "freq": 18, "aud": "家庭照护者", "q": "共用设备是否影响读数、怎么管理", "angle": "拟讲共用可行性、分别记录分开设档；共用建议卡内未覆盖，先核验再制作", "cards": "—", "scope": "事实卡未覆盖共用情形", "ev": "待核验", "s1": 2, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 3, "reason": "高频家庭场景；共用建议无依据，待核验", "status": "暂缓", "review": "否"}, {"no": 29, "cat": "特殊情况", "title": "怀孕后还能用家里的血压计吗", "raw": "“怀孕后还能用同一个设备吗”", "src": "Q33", "freq": 14, "aud": "备孕/孕期家庭成员", "q": "家用设备在孕期是否适用", "angle": "按F03适用与限定：特殊人群需额外确认设备适用性；孕期读数解读与随访遵产科医生（F01）；不做孕期具体指导", "cards": "F03（适用与限定）", "scope": "特殊人群需额外确认设备适用性", "ev": "已核对", "s1": 1, "s2": 0, "s3": 1, "s4": 0, "s5": 1, "score": 1, "reason": "超主受众定位；F03限定条款支持“需确认适用性”，涉孕产须复核", "status": "未开始", "review": "是"}, {"no": 30, "cat": "特殊情况", "title": "小孩可以用成人的袖带吗", "raw": "“小孩可以用成人袖带吗”", "src": "Q34", "freq": 3, "aud": "隔代照护家庭", "q": "儿童测量是否需专用袖带及原因", "angle": "F03仅支持“袖带尺寸应合适”；儿童专用规格属儿科范畴卡内未覆盖，只做一句话提醒并引导儿科", "cards": "F03（部分）", "scope": "仅“袖带尺寸应合适”，儿童规格未覆盖", "ev": "待核验", "s1": 0, "s2": 0, "s3": 0, "s4": 0, "s5": 1, "score": 0, "reason": "超主受众定位、低频；卡内无儿童袖带依据", "status": "暂缓", "review": "是"}, {"no": 31, "cat": "就医沟通", "title": "什么时候带记录去复诊、怎么给医生看", "raw": "“什么时候带记录去复诊”", "src": "Q11", "freq": 12, "aud": "患者及照护者", "q": "复诊时机与记录的呈现方式", "angle": "F10支持携带测量记录和设备与医疗人员核对；复诊时机卡内未定，先核验再制作", "cards": "F10（部分）", "scope": "支持携带记录和设备核对；时机未定", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 1, "s5": 0, "score": 3, "reason": "随访沟通核心选题；F10支持带什么，时机待核验", "status": "暂缓", "review": "否"}, {"no": 32, "cat": "就医沟通", "title": "血压正常了，能不能停药", "raw": "“正常了能不能停药”", "src": "Q12", "freq": 1, "aud": "患者及照护者", "q": "读数正常后自行停药的风险与正确做法", "angle": "按F02直接回答：不要仅因家庭读数改变而自行停药，任何用药调整需与医疗人员讨论；常设提醒内容", "cards": "F02", "scope": "不要仅因家庭读数改变而自行停药；任何用药调整需与医疗人员讨论", "ev": "已核对", "s1": 0, "s2": 1, "s3": 1, "s4": 1, "s5": 1, "score": 2, "reason": "频次极低但F02直接支持，安全权重最高", "status": "未开始", "review": "是"}, {"no": 33, "cat": "就医沟通", "title": "忘了吃药怎么办、要不要补", "raw": "“忘了吃药怎么办”", "src": "Q13", "freq": 13, "aud": "患者及照护者", "q": "漏服降压药能否补服，如何防漏", "angle": "补服规则因药物而异，卡内未覆盖；只可讲“咨询医生/药师”+防漏工具，具体规则须医生/药师复核", "cards": "—", "scope": "事实卡未覆盖漏服处理", "ev": "待核验", "s1": 1, "s2": 1, "s3": 0, "s4": 1, "s5": 1, "score": 2, "reason": "高频高险；卡内无依据，只讲通用原则并转询医生", "status": "暂缓", "review": "是"}, {"no": 34, "cat": "就医沟通", "title": "视频问诊时怎么展示血压记录", "raw": "“视频问诊怎么展示记录”", "src": "Q30", "freq": 5, "aud": "患者及照护者", "q": "线上问诊时如何高效呈现家庭记录", "angle": "F10部分支持携带记录与医疗人员核对；视频问诊场景细节无依据，核验通过后再制作", "cards": "F10（部分）", "scope": "携带记录核对的原则支持；视频细节未覆盖", "ev": "待核验", "s1": 0, "s2": 1, "s3": 0, "s4": 0, "s5": 0, "score": 1, "reason": "低频；视频场景细节无依据，待核验", "status": "暂缓", "review": "否"}, {"no": 35, "cat": "就医沟通", "title": "医生说的目标值和网上不一样，听谁的", "raw": "“医生说的目标值和网上不同怎么办”", "src": "Q36", "freq": 5, "aud": "患者", "q": "个体化目标与网络通用标准的矛盾怎么理解", "angle": "拟讲目标值个体化逻辑、以主治医生为准；个体化目标依据卡内未覆盖，先核验再制作", "cards": "—", "scope": "事实卡未覆盖降压目标", "ev": "待核验", "s1": 0, "s2": 1, "s3": 0, "s4": 1, "s5": 0, "score": 2, "reason": "低频但是焦虑点；个体化目标依据待核验", "status": "暂缓", "review": "否"}], "plan": [{"week": "第1周", "typ": "制作", "no": 4, "title": "袖带隔着衣服量行不行", "score": 5, "mins": 45, "ev": "已核对", "cards": "F06", "note": "全库最高分（5分/F06）；统一口径“露出测量的上臂，袖带按说明接触皮肤”，不将挽袖或只脱外套写成通用办法", "status": "未开始"}, {"week": "第1周", "typ": "制作", "no": 2, "title": "刚运动完能不能量", "score": 4, "mins": 45, "ev": "已核对", "cards": "F04", "note": "4分/F04；测前30分钟避免运动（同覆盖吸烟、咖啡因），做“测前避免清单”", "status": "未开始"}, {"week": "第1周", "typ": "核验", "no": 23, "title": "漏记一天怎么办", "score": 3, "mins": 15, "ev": "待核验", "cards": "—", "note": "检索“漏记影响趋势判断”的依据；未通过核验前该选题置“暂缓”，不得发布", "status": "未开始"}, {"week": "第1周", "typ": "核验", "no": 28, "title": "一家人共用一台血压计行吗", "score": 3, "mins": 15, "ev": "待核验", "cards": "—", "note": "检索多人共用设备的建议；未通过核验前该选题置“暂缓”", "status": "未开始"}, {"week": "第2周", "typ": "制作", "no": 12, "title": "手臂怎么放、要抬多高", "score": 4, "mins": 45, "ev": "已核对", "cards": "F07", "note": "4分/F07；演示“手臂有支撑、袖带与心脏同高”，短视频易出彩", "status": "未开始"}, {"week": "第2周", "typ": "制作", "no": 6, "title": "家用血压计怎么买", "score": 4, "mins": 45, "ev": "已核对", "cards": "F03", "note": "4分/F03；讲选经验证的上臂式、袖带尺寸应合适，不提品牌；认证标准名称与尺寸测量方法先补充核验", "status": "未开始"}, {"week": "第2周", "typ": "核验", "no": 10, "title": "一天量几次、什么时候量", "score": 3, "mins": 15, "ev": "待核验", "cards": "—", "note": "检索家庭血压日频次与时段建议（F09明确频次由医生确定，需指南原文）", "status": "未开始"}, {"week": "第2周", "typ": "核验", "no": 22, "title": "早上和晚上数字不同正常吗", "score": 3, "mins": 15, "ev": "待核验", "cards": "—", "note": "检索血压昼夜波动规律与家庭记录合理范围", "status": "未开始"}, {"week": "第3周", "typ": "制作", "no": 7, "title": "袖带太小怎么办", "score": 4, "mins": 45, "ev": "已核对", "cards": "F03", "note": "4分/F03；强调袖带尺寸应合适；尺寸测量方法与“过小致偏高”结论均待核验后再写入", "status": "未开始"}, {"week": "第3周", "typ": "制作", "no": 8, "title": "第一次数字高，要不要重测", "score": 4, "mins": 45, "ev": "已核对", "cards": "F09、F10", "note": "4分/F09+F10；讲“每次取两次读数、间隔1分钟并记录”，不使用“取平均”表述", "status": "未开始"}, {"week": "第3周", "typ": "核验", "no": 20, "title": "血压记录要保留哪些数值", "score": 3, "mins": 15, "ev": "待核验", "cards": "F09、F10（部分）", "note": "确定家庭血压记录应含字段（F09仅写“记录结果”），补事实卡后做记录模板", "status": "未开始"}, {"week": "第3周", "typ": "核验", "no": 31, "title": "什么时候带记录去复诊、怎么给医生看", "score": 3, "mins": 15, "ev": "待核验", "cards": "F10（部分）", "note": "确定复诊时机建议（F10已支持带什么，时机需补充依据）", "status": "未开始"}, {"week": "第4周", "typ": "制作", "no": 1, "title": "测前要安静坐多久", "score": 4, "mins": 45, "ev": "已核对", "cards": "F05", "note": "4分/F05；测前“排尿→静坐5分钟→测量”顺序，可与憋尿、能聊天等合集引用", "status": "未开始"}, {"week": "第4周", "typ": "制作", "no": 9, "title": "两次测量间隔多久", "score": 3, "mins": 45, "ev": "已核对", "cards": "F09", "note": "3分/F09；一句话讲清“两次读数、间隔1分钟、记录”", "status": "未开始"}, {"week": "第4周", "typ": "核验", "no": 17, "title": "手腕式和上臂式一样吗", "score": 2, "mins": 15, "ev": "待核验", "cards": "F03（部分）", "note": "检索腕式与上臂式准确性对比（F03仅支持选上臂式）", "status": "未开始"}, {"week": "第4周", "typ": "核验", "no": 33, "title": "忘了吃药怎么办、要不要补", "score": 2, "mins": 15, "ev": "待核验", "cards": "—", "note": "检索漏服处理依据并同步送医生/药师复核；未复核前不得制作", "status": "未开始"}, {"week": "备选", "typ": "制作", "no": 19, "title": "每次都测五遍好吗", "score": 3, "mins": 45, "ev": "已核对", "cards": "F09", "note": "3分/F09；标准两次读数，过度测量影响不展开", "status": "未开始"}, {"week": "备选", "typ": "制作", "no": 15, "title": "憋尿会影响读数吗", "score": 2, "mins": 45, "ev": "已核对", "cards": "F05", "note": "2分/F05；一句话内容，适合并入测前合集", "status": "未开始"}, {"week": "备选", "typ": "制作", "no": 11, "title": "测量能聊天吗", "score": 2, "mins": 45, "ev": "已核对", "cards": "F08", "note": "2分/F08；测量中不说话不用手机，短内容", "status": "未开始"}], "weeksum": [{"week": "第1周", "mins": 120, "chk": "达标"}, {"week": "第2周", "mins": 120, "chk": "达标"}, {"week": "第3周", "mins": 120, "chk": "达标"}, {"week": "第4周", "mins": 120, "chk": "达标"}], "plan_note": "说明：每周约2小时=2条制作（各45分钟）+2项核验（各15分钟）=120分钟，每周合计见下方“周用时核对”；“备选”行不计入，如启用需在当周120分钟额度内置换。制作题均选自“已核对”选题；核验任务未通过前，对应选题状态为“暂缓”、不得制作发布。第4周末将核验结果回填选题库评分并重排次月清单。", "reviews": [{"no": 26, "title": "头晕但量出来正常，怎么办", "cat": "特殊情况", "raw": "“头晕但数字正常怎么办”", "src": "Q26", "freq": 9, "cards": "F01、F10（部分）", "why": "涉症状与就医判断，表述不当可能延误就医；卡内仅安全框架", "who": "心内科医生"}, {"no": 29, "title": "怀孕后还能用家里的血压计吗", "cat": "特殊情况", "raw": "“怀孕后还能用同一个设备吗”", "src": "Q33", "freq": 14, "cards": "F03（适用与限定）", "why": "孕期属特殊人群，超出账号主受众定位；孕期具体管理须产科确认", "who": "产科/内科医生"}, {"no": 30, "title": "小孩可以用成人的袖带吗", "cat": "特殊情况", "raw": "“小孩可以用成人袖带吗”", "src": "Q34", "freq": 3, "cards": "无", "why": "儿童袖带规格属儿科范畴，卡内未覆盖", "who": "儿科医生"}, {"no": 32, "title": "血压正常了，能不能停药", "cat": "就医沟通", "raw": "“正常了能不能停药”", "src": "Q12", "freq": 1, "cards": "F02", "why": "F02虽直接支持“不自行停药”，涉用药安全仍须医生确认表述", "who": "心内科医生"}, {"no": 33, "title": "忘了吃药怎么办、要不要补", "cat": "就医沟通", "raw": "“忘了吃药怎么办”", "src": "Q13", "freq": 13, "cards": "无", "why": "补服规则因药物而异，卡内未覆盖", "who": "心内科医生/临床药师"}], "pending": [{"no": 5, "title": "左右手应该选哪边", "cat": "家庭测量", "src": "Q05", "freq": 4, "gap": "双臂测量与固定手臂的建议（如首次双臂对比、以高侧为准）需检索指南原文", "handle": "暂缓，核验通过后再排期"}, {"no": 10, "title": "一天量几次、什么时候量", "cat": "家庭测量", "src": "Q10", "freq": 16, "gap": "家庭血压监测的日频次与时段建议（F09明确频次由医疗人员确定，需检索指南原文）", "handle": "暂缓，核验通过后再排期"}, {"no": 13, "title": "腿可以翘着吗", "cat": "家庭测量", "src": "Q17", "freq": 8, "gap": "腿部摆放对读数的影响及标准坐姿要求", "handle": "暂缓，核验通过后再排期"}, {"no": 14, "title": "没有靠背行不行", "cat": "家庭测量", "src": "Q18", "freq": 2, "gap": "背部支撑要求及无靠背时的替代做法", "handle": "暂缓，核验通过后再排期"}, {"no": 16, "title": "一量就紧张、数字偏高怎么办", "cat": "家庭测量", "src": "Q20", "freq": 4, "gap": "情绪/紧张对家庭读数影响的量化证据与缓解方法", "handle": "暂缓，核验通过后再排期"}, {"no": 17, "title": "手腕式和上臂式一样吗", "cat": "家庭测量", "src": "Q21", "freq": 14, "gap": "腕式与上臂式准确性对比及腕式适用人群", "handle": "暂缓，核验通过后再排期"}, {"no": 18, "title": "血压计用多久要核对一次", "cat": "家庭测量", "src": "Q24", "freq": 11, "gap": "家用血压计校验/核对周期及发现设备不准的方法", "handle": "暂缓，核验通过后再排期"}, {"no": 20, "title": "血压记录要保留哪些数值", "cat": "记录随访", "src": "Q22", "freq": 14, "gap": "家庭血压记录应含字段（F09仅写“记录结果”）", "handle": "暂缓，核验通过后再排期"}, {"no": 21, "title": "纸质记录还是手机记录", "cat": "记录随访", "src": "Q23", "freq": 13, "gap": "两种记录方式对比的依据；如无权威依据则不得作为结论发布", "handle": "暂缓，核验通过后再排期"}, {"no": 22, "title": "早上和晚上数字不同正常吗", "cat": "记录随访", "src": "Q25", "freq": 15, "gap": "血压昼夜节律、家庭记录合理波动范围（需检索指南原文）", "handle": "暂缓，核验通过后再排期"}, {"no": 23, "title": "漏记一天怎么办", "cat": "记录随访", "src": "Q27", "freq": 19, "gap": "漏记对医生判断影响的解释口径", "handle": "暂缓，核验通过后再排期"}, {"no": 24, "title": "能只记最低的一次吗", "cat": "记录随访", "src": "Q31", "freq": 6, "gap": "如实/完整记录要求的直接依据", "handle": "暂缓，核验通过后再排期"}, {"no": 25, "title": "老人手抖，怎么测才准", "cat": "特殊情况", "src": "Q14", "freq": 6, "gap": "手抖老人测量的替代做法", "handle": "暂缓，核验通过后再排期"}, {"no": 26, "title": "头晕但量出来正常，怎么办", "cat": "特殊情况", "src": "Q26", "freq": 9, "gap": "症状与读数不一致的就医引导表述（须医生复核）", "handle": "暂缓，检索依据后送医生复核"}, {"no": 27, "title": "出门旅游要不要带血压计", "cat": "特殊情况", "src": "Q28", "freq": 8, "gap": "旅行期间测量建议", "handle": "暂缓，核验通过后再排期"}, {"no": 28, "title": "一家人共用一台血压计行吗", "cat": "特殊情况", "src": "Q29", "freq": 18, "gap": "多人共用设备的卫生与管理建议", "handle": "暂缓，核验通过后再排期"}, {"no": 30, "title": "小孩可以用成人的袖带吗", "cat": "特殊情况", "src": "Q34", "freq": 3, "gap": "儿童袖带规格与儿童血压测量要求（儿科范畴）", "handle": "暂缓，检索依据后送医生复核"}, {"no": 31, "title": "什么时候带记录去复诊、怎么给医生看", "cat": "就医沟通", "src": "Q11", "freq": 12, "gap": "复诊时机与记录整理展示方式", "handle": "暂缓，核验通过后再排期"}, {"no": 33, "title": "忘了吃药怎么办、要不要补", "cat": "就医沟通", "src": "Q13", "freq": 13, "gap": "漏服降压药的处理原则（因药物而异，须医生/药师确认）", "handle": "暂缓，检索依据后送医生复核"}, {"no": 34, "title": "视频问诊时怎么展示血压记录", "cat": "就医沟通", "src": "Q30", "freq": 5, "gap": "线上问诊展示记录的具体做法", "handle": "暂缓，核验通过后再排期"}, {"no": 35, "title": "医生说的目标值和网上不一样，听谁的", "cat": "就医沟通", "src": "Q36", "freq": 5, "gap": "降压目标个体化的指南依据", "handle": "暂缓，核验通过后再排期"}], "notes": [{"k": "版本", "v": "v4（删去/标注内容角度中超出事实卡的扩展：行走/家务等待示例、袖带尺寸测量方法、摆放技巧；新增“扩展内容口径”条目；配套HTML选题看板）。"}, {"k": "数据来源", "v": "①资料/患者问题.csv：36条合成患者问题（不对应真实患者，频次为模拟频次，合计353）；②资料/账号定位资料.txt：社区心内科医生人设，受众60岁以上患者及照护者，每周2小时；③资料/家庭血压事实卡.csv：F01–F10，状态“来源核对、医生未签署”。"}, {"k": "合并规则", "v": "仅Q04与Q35合并（同为衣物与袖带接触问题）。“坐多久/能聊天”“跷腿/无靠背”“第一次高值重测/两次间隔”“运动/咖啡”等仅相关不算同义，均独立成题。35个选题覆盖全部36条来源各一次，频次合计353与原CSV一致（脚本内已断言校验）。"}, {"k": "分类体系", "v": "家庭测量19 / 记录随访5 / 特殊情况6 / 就医沟通5。"}, {"k": "需求(0-2)阈值", "v": "按合计频次：≥18→2分；8~17→1分；≤7→0分。"}, {"k": "专业匹配(0-1)", "v": "1=契合“60+患者及照护者、家庭监测/随访沟通”定位；0=超出定位（孕产、儿童）。"}, {"k": "证据充分(0-1)规则", "v": "1=事实卡F01–F10有直接且足够支持，须在“支持事实卡/支持范围”列写明F编号与卡内原文范围；0=卡内未覆盖或仅部分相关（支持事实卡列注明“部分”），同时列入待核验清单。医学建议不得凭空补写。"}, {"k": "重要性(0-1)", "v": "1=对健康决策或安全影响大；0=一般实用信息。"}, {"k": "风险扣分(0-1)", "v": "1=涉个体化用药、孕产、儿童、症状判断，同时自动列入专业复核清单。"}, {"k": "总分（公式）", "v": "总分 = MAX(0, MIN(5, 需求+专业匹配+证据充分+重要性-风险扣分))，写入选题库R列并保留底层数字（M~Q列），0~5分，红-黄-绿色阶。"}, {"k": "证据状态", "v": "已核对=内容可依据F01–F10撰写；待核验=须先检索依据（见“待核验清单”），核验前状态统一为“暂缓”、不得制作发布；医学结论缺依据时保持待核验，不以内容标签替代依据。"}, {"k": "重要口径更正", "v": "“两次取平均”并非F09所写。F09原文为“每次测量取两次读数，间隔1分钟，并记录结果”，现有依据只支持两次读数、间隔1分钟并记录；如何取值待核验，相关选题内容不得出现“取平均”。"}, {"k": "扩展内容口径", "v": "支持事实卡列仅覆盖选题的核心口径。内容角度中超出卡内范围的扩展（如运动后行走/家务等待示例、袖带尺寸测量方法、摆放技巧等）一律删去或注明“需补充依据后再写”；不因选题已挂F编号而视为扩展部分已核对。"}, {"k": "状态枚举", "v": "未开始 / 资料收集 / 脚本撰写 / 已发布 / 暂缓（选题库T列、首月清单J列带下拉）。"}, {"k": "使用方式", "v": "选题库已开启筛选、冻结前3列；R列总分与F列频次为色阶；“待核验”证据状态黄底、“需专业复核=是”黄底红字。核验通过后更新L/O列与评分，评分理由随之修订。"}, {"k": "合规提醒", "v": "事实卡医生未签署；所有“已核对”内容发布前仍需按账号规范完成医生签署流程；专业复核清单共5项（以实际数据行为准，不含表尾说明行），必须医生复核后才能发布。"}], "xlsx": "高血压科普选题库.xlsx"};
+
+// ---- 统计（由工作簿实际数据计算）----
+const nTotal = D.topics.length;
+const nOk = D.topics.filter(t => t.ev === "已核对").length;
+const nWait = D.topics.filter(t => t.ev === "待核验").length;
+const nReview = D.topics.filter(t => t.review === "是").length;
+const freqTotal = D.topics.reduce((s, t) => s + t.freq, 0);
+const avgScore = (D.topics.reduce((s, t) => s + t.score, 0) / nTotal).toFixed(2);
+document.getElementById("stats").innerHTML = [
+  [nTotal, "选题总数"], [nOk, "已核对（可制作）"], [nWait, "待核验（暂缓）"],
+  [nReview, "需专业复核"], [freqTotal, "来源频次合计"], [avgScore, "平均总分"],
+  ["120分钟", "首月每周用时上限"]
+].map(([n, l]) => `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
+
+// ---- 下拉选项 ----
+const cats = [...new Set(D.topics.map(t => t.cat))];
+const statuses = [...new Set(D.topics.map(t => t.status))];
+document.getElementById("fCat").innerHTML += cats.map(c => `<option>${c}</option>`).join("");
+document.getElementById("fStatus").innerHTML += statuses.map(s => `<option>${s}</option>`).join("");
+
+// ---- 选题卡片 ----
+function badge(cls, txt){ return `<span class="b ${cls}">${txt}</span>`; }
+function scoreCls(s){ return "score" + s; }
+function evBadge(t){
+  return t.ev === "已核对" ? badge("evok", "证据·已核对") : badge("evwait", "证据·待核验");
+}
+function stBadge(t){
+  return t.status === "已发布" ? badge("st-pub", "状态·" + t.status)
+    : t.status === "暂缓" ? badge("st-hold", "状态·暂缓") : badge("plain", "状态·" + t.status);
+}
+function card(t){
+  const detail = `
+    <div class="detail">
+      <div class="meta"><b>患者原话：</b>${t.raw}</div>
+      <div class="meta"><b>来源编号：</b>${t.src}　<b>合计频次：</b>${t.freq}</div>
+      <div class="meta"><b>受众：</b>${t.aud}</div>
+      <div class="meta"><b>核心问题：</b>${t.q}</div>
+      <div class="meta"><b>内容角度：</b>${t.angle}</div>
+      <div class="meta"><b>支持事实卡：</b>${t.cards}　<b>支持范围：</b>${t.scope}</div>
+      <div class="meta"><b>证据状态：</b>${t.ev}　<b>状态：</b>${t.status}${t.review === "是" ? "　<b>需专业复核</b>" : ""}</div>
+      <div class="scoreline">
+        ${badge("plain","需求 "+t.s1)}${badge("plain","专业匹配 "+t.s2)}${badge("plain","证据充分 "+t.s3)}${badge("plain","重要性 "+t.s4)}${badge(t.s5>0?"review":"plain","风险扣分 "+t.s5)}${badge("plain","总分 "+t.score)}
+      </div>
+      <div class="meta"><b>评分理由：</b>${t.reason}</div>
+    </div>`;
+  return `<div class="card" data-no="${t.no}">
+    <div class="top"><h3>${t.no}. ${t.title}</h3><span class="no">${t.cat}</span></div>
+    <div class="badges">
+      ${badge(scoreCls(t.score), "总分 " + t.score)}${badge("plain", "频次 " + t.freq)}
+      ${evBadge(t)}${stBadge(t)}${t.review === "是" ? badge("review", "需专业复核") : ""}
+    </div>
+    <div class="raw">${t.raw}</div>
+    <div class="meta"><b>来源：</b>${t.src}　<b>事实卡：</b>${t.cards}</div>
+    <button class="toggle">查看完整信息 ▾</button>${detail}</div>`;
+}
+
+// ---- 筛选与排序 ----
+const kw = document.getElementById("kw"), fCat = document.getElementById("fCat"),
+      fEv = document.getElementById("fEv"), fStatus = document.getElementById("fStatus"),
+      fReview = document.getElementById("fReview"), sortSel = document.getElementById("sort");
+function hay(t){ return [t.title, t.raw, t.src, t.cat, t.angle, t.q, t.cards, t.scope, t.reason, t.status, t.ev, t.aud].join(" ").toLowerCase(); }
+function render(){
+  const k = kw.value.trim().toLowerCase();
+  let list = D.topics.filter(t =>
+    (!k || hay(t).includes(k)) &&
+    (!fCat.value || t.cat === fCat.value) &&
+    (!fEv.value || t.ev === fEv.value) &&
+    (!fStatus.value || t.status === fStatus.value) &&
+    (!fReview.value || t.review === fReview.value));
+  const key = sortSel.value;
+  list = list.slice().sort((a, b) =>
+    key === "no" ? a.no - b.no : key === "freq" ? (b.freq - a.freq) || (b.score - a.score) : (b.score - a.score) || (b.freq - a.freq));
+  document.getElementById("grid").innerHTML = list.length ? list.map(card).join("")
+    : `<div class="empty" style="grid-column:1/-1">没有符合条件的选题，请调整搜索或筛选条件。</div>`;
+  document.getElementById("cnt").textContent = `共 ${list.length} / ${nTotal} 题`;
+}
+[kw, fCat, fEv, fStatus, fReview, sortSel].forEach(el => el.addEventListener("input", render));
+document.getElementById("grid").addEventListener("click", e => {
+  const btn = e.target.closest(".toggle");
+  if (btn) btn.closest(".card").classList.toggle("open"),
+    btn.textContent = btn.closest(".card").classList.contains("open") ? "收起 ▴" : "查看完整信息 ▾";
+});
+render();
+
+// ---- 首月安排 ----
+document.getElementById("planBody").innerHTML = D.plan.map(p => {
+  const t = D.topics.find(x => x.no === p.no) || {};
+  return `<tr${p.week === "备选" ? ' style="background:var(--grey-bg)"' : ""}>
+    <td>${p.week}</td><td>${p.typ}</td><td>${p.no}</td><td>${p.title}</td>
+    <td>${p.score}</td><td>${p.mins}分钟</td><td>${p.ev}</td><td>${p.cards}</td>
+    <td>${p.note}</td><td>${p.status}</td></tr>`;
+}).join("");
+document.getElementById("weeksum").innerHTML = D.weeksum.map(w =>
+  `<div class="stat"><div class="n">${w.mins} 分钟 ${w.mins <= 120 ? "✓" : "⚠"}</div><div class="l">${w.week}·${w.chk}</div></div>`).join("");
+document.getElementById("planNote").textContent = D.plan_note || "";
+
+// ---- 专业复核 / 待核验 ----
+document.getElementById("reviewBody").innerHTML = D.reviews.map(v => `<tr>
+  <td>${v.no}</td><td>${v.title}</td><td>${v.raw}</td><td>${v.src}</td><td>${v.freq}</td>
+  <td>${v.cards}</td><td>${v.why}</td><td>${v.who}</td></tr>`).join("");
+document.getElementById("pendingBody").innerHTML = D.pending.map(v => {
+  const t = D.topics.find(x => x.no === v.no) || {};
+  return `<tr><td>${v.no}</td><td>${v.title}</td><td>${t.raw || ""}</td><td>${v.src}</td><td>${v.freq}</td>
+  <td>${v.gap}</td><td>${v.handle}</td></tr>`;
+}).join("");
+
+// ---- 说明 ----
+document.getElementById("notesList").innerHTML = D.notes.map(n =>
+  `<div class="kv"><b>${n.k}</b>${n.v}</div>`).join("");
+
+// ---- Tab 切换 ----
+document.getElementById("tabs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#tabs button").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll("section").forEach(s =>
+    s.classList.toggle("show", s.id === "tab-" + b.dataset.tab));
+});
+</script>
+</body>
+</html>

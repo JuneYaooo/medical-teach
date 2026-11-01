@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家庭血压 30 秒短视频 · 分镜看板</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1f2933; --sub:#52606d;
+    --line:#e4e7eb; --accent:#0b6bcb; --accent-soft:#e8f1fb;
+    --tag-bg:#eef1f4; --warn-bg:#fff7e0; --warn-ink:#8a6100;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;padding:20px 14px 48px;}
+  .wrap{max-width:1080px;margin:0 auto;}
+  header{margin-bottom:18px;}
+  h1{font-size:1.35rem;margin-bottom:6px;}
+  .meta{color:var(--sub);font-size:.9rem;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;}
+  .badge{display:inline-block;background:var(--warn-bg);color:var(--warn-ink);border-radius:999px;padding:2px 12px;font-size:.82rem;font-weight:600;}
+  .badge.blue{background:var(--accent-soft);color:var(--accent);}
+  .badge a{color:inherit;text-decoration:underline;}
+  .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px;}
+  .shot{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:0 1px 3px rgba(31,41,51,.06);}
+  .shot-head{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:10px;}
+  .shot-no{font-size:1.15rem;font-weight:700;color:var(--accent);white-space:nowrap;}
+  .ftag{background:var(--tag-bg);border-radius:6px;padding:1px 8px;font-size:.78rem;color:var(--sub);}
+  .dur{margin-left:auto;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 10px;font-size:.8rem;font-weight:700;white-space:nowrap;}
+  .voice{background:#f2f6fb;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:8px 12px;margin-bottom:10px;font-size:.95rem;}
+  .voice b{color:var(--accent);font-size:.78rem;display:block;margin-bottom:2px;}
+  .row{display:flex;gap:8px;margin-bottom:6px;font-size:.88rem;}
+  .row .k{flex:0 0 4.2em;color:var(--sub);font-weight:600;}
+  .row .v{flex:1;}
+  .screen-text{color:var(--accent);font-weight:600;}
+  footer{margin-top:20px;color:var(--sub);font-size:.85rem;border-top:1px solid var(--line);padding-top:12px;}
+  footer p{margin-bottom:4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>家庭血压 30 秒短视频 · 分镜看板（生活场景版）</h1>
+    <div class="meta">
+      <span class="badge">总时长：约 31 秒（预估，未录音实测）</span>
+      <span class="badge blue">口播实测 119 字（去标点），按 4 字/秒换算</span>
+      <span class="badge blue"><a href="家庭血压30秒分镜表.csv" download>下载分镜 CSV</a></span>
+      <span>依据：资料/家庭血压事实卡.csv · 仅用 F05/F08/F09</span>
+    </div>
+  </header>
+
+  <div class="board">
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-no">镜 1</span><span class="ftag">非医学句（开头）</span><span class="dur">6 秒</span></div>
+      <div class="voice"><b>口播</b>拿出血压计就准备按按钮？先别急，量血压之前，有几步要做对。</div>
+      <div class="row"><span class="k">画面</span><span class="v">主人翁从抽屉/袋中拿出血压计放到桌上，手指伸向"开始"键，画面定格</span></div>
+      <div class="row"><span class="k">屏幕文字</span><span class="v screen-text">量血压前的准备</span></div>
+      <div class="row"><span class="k">动作</span><span class="v">伸手按键、被另一只手轻按住、定格</span></div>
+      <div class="row"><span class="k">景别</span><span class="v">中近景</span></div>
+      <div class="row"><span class="k">道具</span><span class="v">家用电子血压计（含袖带）、桌椅</span></div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-no">镜 2</span><span class="ftag">F05</span><span class="dur">6 秒</span></div>
+      <div class="voice"><b>口播</b>量之前，先排空膀胱，然后安静地坐下来休息，至少五分钟。</div>
+      <div class="row"><span class="k">画面</span><span class="v">从卫生间门出来→坐到沙发上安静静坐，看一眼计时器</span></div>
+      <div class="row"><span class="k">屏幕文字</span><span class="v screen-text">先排空膀胱 · 安静休息至少5分钟</span></div>
+      <div class="row"><span class="k">动作</span><span class="v">落座、双手放腿上、目视计时器等待</span></div>
+      <div class="row"><span class="k">景别</span><span class="v">中景切近景</span></div>
+      <div class="row"><span class="k">道具</span><span class="v">沙发或座椅、挂钟或手机计时器</span></div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-no">镜 3</span><span class="ftag">F08</span><span class="dur">5 秒</span></div>
+      <div class="voice"><b>口播</b>测量的时候，保持安静，不说话，也不刷手机。</div>
+      <div class="row"><span class="k">画面</span><span class="v">袖带已绑好，手机屏幕朝下扣在桌上，嘴唇轻闭静坐</span></div>
+      <div class="row"><span class="k">屏幕文字</span><span class="v screen-text">测量时：不说话 · 不用手机</span></div>
+      <div class="row"><span class="k">动作</span><span class="v">手机扣桌特写→人物静坐不动、平视前方</span></div>
+      <div class="row"><span class="k">景别</span><span class="v">近景（含手部特写）</span></div>
+      <div class="row"><span class="k">道具</span><span class="v">绑好袖带的血压计、手机</span></div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-no">镜 4</span><span class="ftag">F09</span><span class="dur">7 秒</span></div>
+      <div class="voice"><b>口播</b>每次测量取两次读数，中间间隔一分钟，量完记得把结果记下来。</div>
+      <div class="row"><span class="k">画面</span><span class="v">血压计显示第一次读数→秒针走动→第二次读数→在本子上记录</span></div>
+      <div class="row"><span class="k">屏幕文字</span><span class="v screen-text">测2次 · 隔1分钟 · 记下来</span></div>
+      <div class="row"><span class="k">动作</span><span class="v">记第一次读数、等待、再测、再记录</span></div>
+      <div class="row"><span class="k">景别</span><span class="v">特写（屏幕与本子交替）</span></div>
+      <div class="row"><span class="k">道具</span><span class="v">血压计、笔记本、笔</span></div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-no">镜 5</span><span class="ftag">F09 限定句</span><span class="dur">7 秒</span></div>
+      <div class="voice"><b>口播</b>至于每天量几次、量多长时间，听医生的安排。下次量血压，照这三步来。</div>
+      <div class="row"><span class="k">画面</span><span class="v">合上记录本，血压计装回收纳袋，微笑看镜头</span></div>
+      <div class="row"><span class="k">屏幕文字</span><span class="v screen-text">频次与疗程 遵医嘱</span></div>
+      <div class="row"><span class="k">动作</span><span class="v">点头示意、收拾设备</span></div>
+      <div class="row"><span class="k">景别</span><span class="v">中景</span></div>
+      <div class="row"><span class="k">道具</span><span class="v">记录本、血压计收纳袋</span></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>· 预计时长为按 4 字/秒的换算值（119 字 ≈ 29.8 秒，逐镜向上取整合计 31 秒），<strong>预估，未录音实测</strong>；录音后若超 32 秒，优先删镜 5 末句（10 字）。</p>
+    <p>· 屏幕文字中的数字仅限事实卡来源（5分钟／2次／1分钟）；镜 4 血压计特写不得出现具体读数数值。</p>
+    <p>· 镜 3、镜 4 画面中袖带位置按 F06 作画面核验（袖带直接接触上臂皮肤、不隔衣测量），口播与屏幕文字不含袖带表述。</p>
+    <p>· 事实卡（F05/F08/F09）医生签署均未完成，本看板不构成发布批准。逐句核对依据见《家庭血压30秒核验表.md》。</p>
+  </footer>
+</div>
+</body>
+</html>

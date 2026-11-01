@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>在家量血压 · 6页图文（含海报）</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#E8E5DE; font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; }
+  .wrap { width:100%; overflow:hidden; }
+  iframe { width:1080px; height:1920px; border:0; transform-origin:top left; display:block; }
+  .sep { text-align:center; font-size:15px; color:#5A6472; padding:10px 0; }
+</style>
+</head>
+<body>
+<div class="wrap"><iframe src="分页HTML/p1.html"></iframe></div>
+<div class="wrap"><iframe src="分页HTML/p2.html"></iframe></div>
+<div class="wrap"><iframe src="分页HTML/p3.html"></iframe></div>
+<div class="wrap"><iframe src="分页HTML/p4.html"></iframe></div>
+<div class="wrap"><iframe src="分页HTML/p5.html"></iframe></div>
+<div class="wrap"><iframe src="分页HTML/p6.html"></iframe></div>
+<div class="sep">—— 附：一图版海报 ——</div>
+<div class="wrap"><iframe src="分页HTML/poster.html"></iframe></div>
+<script>
+function fit(){
+  var s=Math.min(1,document.documentElement.clientWidth/1080);
+  document.querySelectorAll('.wrap').forEach(function(w){
+    w.style.height=(1920*s)+'px';
+    w.querySelector('iframe').style.transform='scale('+s+')';
+  });
+}
+window.addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

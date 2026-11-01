@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第5页 · 安静测量，量两次记下来</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { background:#E8E5DE; }
+  .page {
+    width:1080px; height:1920px; background:#FDFBF7;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    color:#1C2430; position:relative; padding:72px 64px; display:flex; flex-direction:column;
+  }
+  .topbar { display:flex; align-items:center; justify-content:space-between; }
+  .step-badge {
+    background:#14406E; color:#fff; font-size:32px; font-weight:700;
+    padding:14px 34px; border-radius:999px; letter-spacing:2px;
+  }
+  .dots { display:flex; gap:14px; }
+  .dot { width:18px; height:18px; border-radius:50%; background:#D8D3C6; }
+  .dot.on { background:#14406E; }
+  h1 { font-size:72px; font-weight:800; color:#14406E; margin-top:40px; letter-spacing:2px; line-height:1.25; }
+  .rule { width:140px; height:10px; background:#C0392B; border-radius:5px; margin-top:24px; }
+  .fig-card {
+    margin-top:40px; background:#fff; border:4px solid #E3E0D8; border-radius:28px;
+    height:720px; display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .count-card {
+    margin-top:40px; background:#fff; border:4px solid #E3E0D8; border-radius:28px;
+    padding:36px 40px; display:flex; align-items:center; justify-content:space-around;
+  }
+  .cnt { text-align:center; }
+  .cnt .num { font-size:84px; font-weight:900; color:#14406E; line-height:1.1; }
+  .cnt .cap { font-size:34px; font-weight:700; margin-top:6px; }
+  .sep { width:8px; height:130px; background:#E3E0D8; border-radius:4px; }
+  .main { font-size:52px; font-weight:800; margin-top:40px; line-height:1.5; }
+  .main .hl { color:#14406E; border-bottom:8px solid #F0B429; }
+  .note {
+    margin-top:24px; font-size:28px; color:#5A6472; background:#F4F0E6;
+    border-left:10px solid #F0B429; border-radius:0 16px 16px 0; padding:18px 26px; line-height:1.6;
+  }
+  .src {
+    position:absolute; left:64px; right:64px; bottom:52px;
+    font-size:24px; color:#5A6472; border-top:2px solid #E3E0D8; padding-top:20px; line-height:1.5;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <div class="step-badge">第 5 步 · 共 6 步</div>
+    <div class="dots">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot on"></div><div class="dot"></div>
+    </div>
+  </div>
+
+  <h1>安静测量<br>量两次记下来</h1>
+  <div class="rule"></div>
+
+  <div class="fig-card">
+    <svg width="940" height="640" viewBox="0 0 940 640">
+      <!-- 桌面 -->
+      <rect x="60" y="520" width="820" height="22" rx="11" fill="#C9A876"/>
+      <rect x="110" y="542" width="26" height="60" fill="#B08F5E"/>
+      <rect x="804" y="542" width="26" height="60" fill="#B08F5E"/>
+      <!-- 安静测量的人 -->
+      <circle cx="330" cy="220" r="56" fill="#F2C9A0"/>
+      <path d="M 288 190 C 296 154 364 154 372 190 C 364 174 296 174 288 190 Z" fill="#8A8F98"/>
+      <rect x="274" y="278" width="116" height="170" rx="34" fill="#4E6E9E"/>
+      <rect x="400" y="300" width="90" height="44" rx="20" fill="#F2C9A0"/>
+      <!-- 手臂上袖带 -->
+      <rect x="420" y="268" width="70" height="90" rx="16" fill="#1E5AA0"/>
+      <rect x="420" y="268" width="70" height="90" rx="16" fill="none" stroke="#123B6D" stroke-width="5"/>
+      <!-- 手指放唇前 "安静" 手势 -->
+      <circle cx="352" cy="252" r="14" fill="#F2C9A0"/>
+      <rect x="346" y="250" width="12" height="52" rx="6" fill="#F2C9A0"/>
+      <!-- 禁说话 -->
+      <g transform="translate(60,40)">
+        <path d="M 0 30 C 0 8 22 0 44 0 C 70 0 88 12 88 32 C 88 52 70 62 44 62 L 20 78 L 24 60 C 8 54 0 44 0 30 Z" fill="#E3E0D8"/>
+        <circle cx="44" cy="30" r="42" fill="none" stroke="#C0392B" stroke-width="9"/>
+        <line x1="14" y1="60" x2="74" y2="0" stroke="#C0392B" stroke-width="9" stroke-linecap="round"/>
+      </g>
+      <text x="104" y="188" text-anchor="middle" font-size="34" font-weight="800" fill="#B3261E">不说话</text>
+      <!-- 禁手机 -->
+      <g transform="translate(60,230)">
+        <rect x="18" y="0" width="52" height="92" rx="12" fill="#1C2430"/>
+        <rect x="26" y="12" width="36" height="58" rx="6" fill="#EAF1F8"/>
+        <circle cx="44" cy="46" r="44" fill="none" stroke="#C0392B" stroke-width="9"/>
+        <line x1="14" y1="76" x2="74" y2="16" stroke="#C0392B" stroke-width="9" stroke-linecap="round"/>
+      </g>
+      <text x="104" y="372" text-anchor="middle" font-size="34" font-weight="800" fill="#B3261E">不看手机</text>
+      <!-- 记录本 + 笔 -->
+      <g transform="translate(600,330)">
+        <rect x="0" y="0" width="240" height="180" rx="14" fill="#fff" stroke="#1C2430" stroke-width="7"/>
+        <line x1="30" y1="50" x2="210" y2="50" stroke="#9AA3AD" stroke-width="6" stroke-linecap="round"/>
+        <line x1="30" y1="88" x2="210" y2="88" stroke="#9AA3AD" stroke-width="6" stroke-linecap="round"/>
+        <line x1="30" y1="126" x2="160" y2="126" stroke="#9AA3AD" stroke-width="6" stroke-linecap="round"/>
+        <text x="120" y="164" text-anchor="middle" font-size="26" font-weight="700" fill="#14406E">测量记录</text>
+        <path d="M 262 30 L 300 68 L 232 136 L 190 148 L 202 106 Z" fill="#F0B429" stroke="#1C2430" stroke-width="5" stroke-linejoin="round"/>
+      </g>
+      <!-- 安静符号 -->
+      <g transform="translate(700,120)">
+        <path d="M 0 30 C 0 8 22 0 44 0 C 70 0 88 12 88 32 C 88 52 70 62 44 62 L 20 78 L 24 60 C 8 54 0 44 0 30 Z" fill="#EAF1F8" stroke="#14406E" stroke-width="5"/>
+        <text x="44" y="44" text-anchor="middle" font-size="34" font-weight="800" fill="#14406E">嘘…</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="count-card">
+    <div class="cnt"><div class="num">2 次</div><div class="cap">每次测量</div></div>
+    <div class="sep"></div>
+    <div class="cnt"><div class="num">1 分钟</div><div class="cap">两次间隔</div></div>
+    <div class="sep"></div>
+    <div class="cnt"><div class="num">1 本</div><div class="cap">记录结果</div></div>
+  </div>
+
+  <div class="main">测量时<span class="hl">不说话、不看手机</span></div>
+  <div class="note">每天测量几次、什么时间测，按医疗人员安排。</div>
+
+  <div class="src">来源：美国心脏协会（AHA）· Monitoring Your Blood Pressure at Home · heart.org</div>
+</div>
+</body>
+</html>
