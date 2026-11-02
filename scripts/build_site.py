@@ -242,7 +242,9 @@ def overview(l):
     elif l['code'] == '01':
         how = '先看下面的讲解录屏，再按第 1–4 步在 WorkBuddy 里操作，最后对照“自查与练习”检查结果。'
     else:
-        how = '先看讲解录屏了解全过程；再把“快速实操”里的提示词依次复制到 WorkBuddy，每步完成后打开结果文件核对；最后读“完整方法”，换成自己的课题再做一次。'
+        how = ('先看讲解录屏了解全过程；再把“实操 1”的提示词复制到 WorkBuddy，完成后打开结果文件核对；最后读“完整方法”，换成自己的课题再做一次。'
+               '<br><strong>注意</strong>：AI 每次的结果都不一样。实操 2 起的提示词是作者针对自己那次结果写的追问，里面提到的编号、数字和错误可能和你的结果对不上。'
+               '先检查你的结果是否有同类问题，有就参照改写后再发，没有就跳过，不要原样照抄。')
     return (f'<section class="lesson-overview" aria-label="本课概览">' + (f'<dl>{rows}</dl>' if rows else '') +
             f'<p class="how"><strong>怎么学</strong>{how}</p><div class="overview-actions">{pack_button("../")}'
             f'<a class="secondary" href="#recording">看讲解录屏</a></div></section>')
