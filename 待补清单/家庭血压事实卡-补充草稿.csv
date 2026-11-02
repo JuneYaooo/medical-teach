@@ -1,0 +1,9 @@
+﻿编号,事实陈述,来源,来源位置,适用与限定,核对状态,医生签署,核对日期
+G01,家庭血压平均值≥135/85 mmHg，可诊断为高血压或血压未控制。,2019 Chinese Hypertension League guidelines on home blood pressure monitoring. J Clin Hypertens 2020;22(3):378-383. doi:10.1111/jch.13779（中文版：诊断学理论与实践 2019;18(3):258-262）,Section 6 Diagnostic thresholds,诊断由医生作出；本卡不用于患者自我诊断,来源原文核对（英文版），待医生审定,未签署,2026-11-01
+G02,早晚各测一次：坐位休息后连续测2–3遍，每遍间隔1分钟；早晨在起床后1小时内、服药、早餐和剧烈运动之前测。,同 G01,Section 5 Frequency and duration,具体测量安排以医生医嘱为准,来源原文核对（英文版），待医生审定,未签署,2026-11-01
+G03,新诊断、治疗初期或血压未控制时，连续测5–7天；血压控制良好时，每周至少测1天。,同 G01,Section 5 Frequency and duration,指南未规定是否舍弃第1天读数，不要写“去掉第1天”,来源原文核对（英文版），待医生审定,未签署,2026-11-01
+G04,诊断时取全部读数的平均值。,同 G01,Section 5；Section 7 Conclusions and recommendations,面向患者时可写“把读数都记下来，复诊时交给医生”,来源原文核对（英文版），待医生审定,未签署,2026-11-01
+G05,只推荐使用经过验证的血压计，首选上臂式（示波法）电子血压计。,同 G01,Section 4.3；Section 7,与 F03 一致，可作为 F03 的中国来源,来源原文核对（英文版），待医生审定,未签署,2026-11-01
+G06,测量时背部挺直并有支撑（坐餐椅，不坐沙发），双脚平放地面，不跷腿。,https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home,How to use a home blood pressure monitor,补充 F07 只写了手臂支撑的部分,来源原文核对（AHA 镜像页，Last Reviewed 2024-05-20），待医生审定,未签署,2026-11-01
+G07,读数突然高于180/120 mmHg时，至少等1分钟再测一次。,同 G06,If you get a high blood pressure reading,复测后如何处理见 G08，并由医生补充本地就医方式,来源原文核对（AHA 镜像页），待医生审定,未签署,2026-11-01
+G08,血压高于180/120 mmHg，同时出现胸痛、气短、背痛、麻木、无力、视物改变、说话困难、意识混乱、头晕或呕吐等新症状时，立即拨打急救电话。,同 G06,If you get a high blood pressure reading,AHA 原文为拨打 911；国内对应 120。用于患教单急诊框前须医生审定,来源原文核对（AHA 镜像页），待医生审定,未签署,2026-11-01

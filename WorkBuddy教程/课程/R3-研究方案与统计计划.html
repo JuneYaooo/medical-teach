@@ -61,7 +61,7 @@
 </table>
 <h2 id="section-3">1. 先懂三个关键概念</h2>
 <p><strong>方案规范</strong>：干预性试验的方案按 SPIRIT 条目写，观察性研究可以反过来用 STROBE 条目检查自己是否想清楚了需要报告的东西。规范是“查漏清单”，不是写作模板。</p>
-<p><strong>样本量的四个输入</strong>：显著性水平 α（通常 0.05）、把握度 1-β（通常 0.8 或 0.9）、预期效应量、脱落率。其中效应量最关键，必须有文献或预试验来源。</p>
+<p><strong>样本量的四个输入</strong>：显著性水平 α（通常 0.05）、把握度 1-β（通常 0.8 或 0.9）、预期效应量、脱落率。其中效应量最关键，要有来源：文献、最小临床重要差异（MCID）或预试验。预试验样本小，估出的效应量很不精确，只宜作参考，不宜直接拿来算样本量。</p>
 <p><strong>SAP 为什么要先写</strong>：先看数据再决定怎么分析，很容易不自觉地挑选结果好看的方法。提前写定主分析，是对自己的保护。</p>
 <h2 id="section-4">2. 课前准备</h2>
 <ul>
@@ -86,7 +86,7 @@
 参数不足时，先计算组间差3、4、5 mmHg与标准差12、15、18 mmHg的预算敏感性矩阵；这些是待确认的规划参数，不能写成文献估计。
 保存参数来源表、样本量表和可重跑代码，结合招募窗口评估可行性；暂不把未确认参数对应的人数作为立项结论。
 </code></pre>
-<p>可使用 <a href="https://www.statsmodels.org/stable/generated/statsmodels.stats.power.TTestIndPower.solve_power.html">statsmodels 的两独立样本功效计算</a>。输入的标准化效应量为组间差除以标准差，每组人数与总人数应分别列明。</p>
+<p>可使用 <a href="https://www.statsmodels.org/stable/generated/statsmodels.stats.power.TTestIndPower.solve_power.html">statsmodels 的两独立样本功效计算</a>。输入的标准化效应量为组间差除以标准差，每组人数与总人数应分别列明。注意：TTestIndPower 按 t 分布计算，下文结果表用的是正态近似（z 法），两者每格相差 2–4 人，复算时先确认用的是哪种方法。</p>
 <p><strong>检查点</strong>：固定标准差比较不同组间差，再固定组间差比较不同标准差。核对参数出处、脱落调整、取整方式，以及12个月总周期是否容纳招募和6个月随访。</p>
 <h3>第 4 步：写 SAP 草稿</h3>
 <pre><code class="language-text">请为本研究起草统计分析计划，包括：
@@ -125,7 +125,7 @@
 </code></pre>
 <h2 id="section-7">5. 自查清单</h2>
 <ul>
-<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>样本量的每个参数都有文献编号或标注“预试验”</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>样本量的每个参数都有文献编号，或标注“MCID”“预试验”</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>统计方法和终点类型匹配（二分类终点不用 t 检验）</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>主分析只有一个，其余都标为次要或探索性</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>没有增加未预设的亚组分析</li>

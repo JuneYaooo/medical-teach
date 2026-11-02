@@ -171,12 +171,12 @@ def catalog(prefix=''):
         cards = ''.join(course_card(by_code[c], p) for c in t['codes'])
         hint = f'<p class="track-hint">{t["hint"]}</p>' if t.get('hint') else ''
         tracks += f'''<section class="course-group track" id="{key}"><div class="track-head"><div><h3>{t["name"]}</h3><p>{t["desc"]}</p></div><span class="track-progress" data-track="{key}" data-total="{len(t["codes"])}">{len(t["codes"])} 课</span></div>{hint}<ol class="course-list">{cards}</ol></section>'''
-    body = f'''<header class="site-header">{brand(p + '课程目录.html')}<nav aria-label="主导航"><a href="#prepare">开始前准备</a><a href="#research">科研线</a><a href="#public">科普线</a><a href="{GITHUB_URL}">GitHub</a></nav></header>
-<main id="main" class="home"><section class="hero"><div><p class="eyebrow">医学科研 · 患者科普 · WorkBuddy 实操</p><h1>让医学工作流<br>可复现、可核对。</h1><p class="hero-lead">从一份资料到一个可检查的结果。跟着 WorkBuddy 的真实操作，把文献、数据、写作与患者科普，一步一步做清楚。</p>
+    body = f'''<header class="site-header">{brand(p + '课程目录.html')}<nav aria-label="主导航"><a href="#prepare">开始前准备</a><a href="#research">科研线</a><a href="#public">科普线</a><a href="#faq">常见问题</a><a href="{GITHUB_URL}">GitHub</a></nav></header>
+<main id="main" class="home"><section class="hero"><div><p class="eyebrow">医学科研 · 患者科普 · WorkBuddy 实操</p><h1>让医学工作流<br>可复现、可核对。</h1><p class="hero-lead">从一份资料到一个可检查的结果。跟着 WorkBuddy 的真实操作，把文献、数据、写作与患者科普，一步一步做清楚。</p><p class="hero-what">WorkBuddy 是腾讯推出的桌面 AI 助手：你用中文说清要做什么，它会读取你电脑上指定文件夹里的资料，写文章、做表格、跑统计，并把结果保存成文件。不需要会编程。</p>
 <div class="hero-actions"><a class="primary" href="{p}课程/{url(first["html"])}">开始入门课 <span aria-hidden="true">→</span></a>{pack_button(p)}</div>
 <p id="resume" class="resume" hidden></p><p class="hero-meta">19 节课程 · 配套讲解录屏 · 可复制提示词 · 参考结果对照</p></div>
 <aside class="prepare" id="prepare"><h2>开始前准备</h2><ol>
-<li><span>1</span><div><strong>安装 WorkBuddy</strong><p>课程按 WorkBuddy 5.9.0 录制，界面有差异时以<a href="{WORKBUDDY_URL}">官方说明</a>为准。</p></div></li>
+<li><span>1</span><div><strong>安装并登录 WorkBuddy</strong><p>从<a href="{WORKBUDDY_URL}">官网</a>下载 Windows 或 Mac 版，打开后用微信或手机号登录。使用会消耗积分，新账号有免费额度，具体规则以应用内说明为准。课程按 5.9.0 录制，界面有差异时以官方说明为准。</p></div></li>
 <li><span>2</span><div><strong>下载练习包并解压</strong><p>得到一个“家庭血压项目”文件夹，里面有资料、技能包和参考结果。</p></div></li>
 <li><span>3</span><div><strong>把文件夹设为工作空间</strong><p>在 WorkBuddy 点“新建任务”→“选择工作空间”→“打开本地文件夹”，选中它。</p></div></li>
 <li><span>4</span><div><strong>打开一课，照着做</strong><p>先看讲解录屏，再复制提示词到 WorkBuddy，最后打开结果文件核对。</p></div></li>
@@ -185,6 +185,14 @@ def catalog(prefix=''):
 <div class="catalog-tools"><div><span class="eyebrow">第二步</span><h2>选一条路线</h2><p>两条线可以只学一条；每条线按顺序学，后面的课会用到前面的结果。</p></div><label class="search-label">查找课程<input id="course-search" type="search" placeholder="课程名、编号或关键词" autocomplete="off"></label></div>
 <p id="search-empty" hidden>没有匹配的课程，请试试“数据”“科普”或课程编号。</p>
 <div class="tracks">{tracks}</div>
+<section class="faq" id="faq"><h2>卡住了怎么办</h2>
+<details><summary>提交任务后，没看到生成的文件</summary><p>先看输入框下方是否显示“家庭血压项目”。没有的话，说明没选工作空间，新建任务重新选择。再打开电脑上的“成果”文件夹确认文件是否真的存在，不要只看 WorkBuddy 回复里说“已保存”。</p></details>
+<details><summary>我的结果和录屏、参考结果不一样</summary><p>正常。AI 每次生成的内容都会不同。用每课的核对要点检查你的结果，再对照练习包里的“参考结果”。实操 2 起的提示词是作者针对自己那次结果写的，按你的结果改写后再发。</p></details>
+<details><summary>导入技能时提示“同名技能已存在”</summary><p>说明以前装过。到“专家·技能·连接器 → 技能 → 已安装”里确认它的开关是打开的就行，不用重复导入。</p></details>
+<details><summary>想跳过某一课，或者前一课没做完</summary><p>把练习包“参考结果”里对应的文件夹复制到“成果”下，再学后面的课。例如没做 R4 想学 R5，就把“参考结果/数据分析”复制成“成果/数据分析”。</p></details>
+<details><summary>积分不够了</summary><p>在应用内查看积分说明和补充方式。积分不够时，可以先看录屏、读参考结果，等积分够了再动手做。</p></details>
+<details><summary>能不能用真实病人的数据练习？</summary><p>不能。只用练习包里的模拟数据，或已完全脱敏、所在机构允许上传的数据。姓名、住院号、身份证号、电话都不能出现在资料里。</p></details>
+</section>
 <aside class="scope-note"><strong>关于练习素材</strong><p>统计数据、审稿意见和项目资料为教学模拟；医学事实卡附公开来源，来源核对不等于医生审核。录屏带讲解旁白和字幕，完整提示词见各课正文。P6 提供本次口播稿生成的数字人成片、字幕和配音文件。学习进度只保存在你当前使用的浏览器里。</p></aside></main>
 <footer class="site-footer"><span>医学工作流课堂 · 按步骤学习，依据结果核对。</span><a href="{GITHUB_URL}">查看 Markdown 与课程文件</a></footer>'''
     return shell('课程目录', body, prefix, 'home-page')
@@ -240,7 +248,7 @@ def overview(l):
     if l['code'] == '00':
         how = '读完路线说明后，回到目录先学 01 入门课，再选科研线或科普线。'
     elif l['code'] == '01':
-        how = '先看下面的讲解录屏，再按第 1–4 步在 WorkBuddy 里操作，最后对照“自查与练习”检查结果。'
+        how = '先按第 1、2 步在 WorkBuddy 里生成第一个文件，确认工作空间设置成功；再看讲解录屏，按第 3–5 步导入技能并核对文案；最后对照“自查与练习”检查结果。'
     else:
         how = ('先看讲解录屏了解全过程；再把“实操 1”的提示词复制到 WorkBuddy，完成后打开结果文件核对；最后读“完整方法”，换成自己的课题再做一次。'
                '<br><strong>注意</strong>：AI 每次的结果都不一样。实操 2 起的提示词是作者针对自己那次结果写的追问，里面提到的编号、数字和错误可能和你的结果对不上。'
@@ -281,6 +289,8 @@ def shots_gallery(rendered):
 for l in lessons:
     rendered = md(l['text'])
     rendered = re.sub(r'<img ', '<img loading="lazy" decoding="async" ', rendered)
+    # “作者原文示例”标题 + 代码块 → 折叠块，避免学员原样照抄
+    rendered = re.sub(r'<h4>(作者原文示例[^<]*)</h4>\s*(<pre>.*?</pre>)', r'<details class="author-example"><summary>\1</summary>\2</details>', rendered, flags=re.S)
     sections = []
 
     def heading(m):

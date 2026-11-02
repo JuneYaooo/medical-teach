@@ -99,6 +99,8 @@ R8 的科研 Skill 管“规范”；这个科普 Skill 更重要的是“闸门
 5. 如果我已安装 medical-content-pipeline，多载体任务交给它，本 Skill 只负责风格和闸门。
 ```
 
+（以下是给你自己课题用的示例结构，参考结果里的实际文件名和层级不同，以参考结果为准对照。）
+
 ```markdown
 my-health-content/
 ├── SKILL.md
